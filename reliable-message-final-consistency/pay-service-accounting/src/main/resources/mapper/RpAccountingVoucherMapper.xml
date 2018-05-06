@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="own.stu.distributedTransaction.pay.service.message.dao.RpAccountingVoucherMapper" >
+  <resultMap id="BaseResultMap" type="own.stu.distributedTransaction.pay.service.message.entity.RpAccountingVoucher" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="edit_time" property="editTime" jdbcType="TIMESTAMP" />
+    <result column="entry_type" property="entryType" jdbcType="SMALLINT" />
+    <result column="request_no" property="requestNo" jdbcType="VARCHAR" />
+    <result column="from_system" property="fromSystem" jdbcType="SMALLINT" />
+    <result column="voucher_no" property="voucherNo" jdbcType="VARCHAR" />
+    <result column="accounting_date" property="accountingDate" jdbcType="DATE" />
+    <result column="bank_change_amount" property="bankChangeAmount" jdbcType="DECIMAL" />
+    <result column="payer_account_no" property="payerAccountNo" jdbcType="VARCHAR" />
+    <result column="receiver_account_no" property="receiverAccountNo" jdbcType="VARCHAR" />
+    <result column="bank_account" property="bankAccount" jdbcType="VARCHAR" />
+    <result column="bank_channel_code" property="bankChannelCode" jdbcType="VARCHAR" />
+    <result column="payer_change_amount" property="payerChangeAmount" jdbcType="DECIMAL" />
+    <result column="receiver_change_amount" property="receiverChangeAmount" jdbcType="DECIMAL" />
+    <result column="profit" property="profit" jdbcType="DECIMAL" />
+    <result column="income" property="income" jdbcType="DECIMAL" />
+    <result column="cost" property="cost" jdbcType="DECIMAL" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="bank_order_no" property="bankOrderNo" jdbcType="VARCHAR" />
+    <result column="payer_account_type" property="payerAccountType" jdbcType="SMALLINT" />
+    <result column="pay_amount" property="payAmount" jdbcType="DECIMAL" />
+    <result column="receiver_account_type" property="receiverAccountType" jdbcType="SMALLINT" />
+    <result column="receiver_fee" property="receiverFee" jdbcType="DECIMAL" />
+    <result column="payer_fee" property="payerFee" jdbcType="DECIMAL" />
+  </resultMap>
+
+  <select id="buildAccountingVoucherNo" resultType="string">
+    SELECT FUN_SEQ('ACCOUNTING_REQUEST_NO_SEQ')
+  </select>
+</mapper>
