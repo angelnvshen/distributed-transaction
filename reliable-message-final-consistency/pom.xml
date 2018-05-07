@@ -19,7 +19,7 @@
 		<module>pay-app-queue</module>
         <module>pay-web-boss</module>
 		<module>pay-service-user</module>
-	</modules>
+    </modules>
 	<packaging>pom</packaging>
 
 	<name>reliable-message-final-consistency</name>

@@ -6,7 +6,7 @@
  * 课程地址：http://www.roncoo.com/details/7ae3d7eddc4742f78b0548aa8bd9ccdb
  * ====================================================================
  */
-package own.stu.distributedTransaction.pay.web.message.controller.common;
+package own.stu.distributedTransaction.pay.web.messageSe.controller.common;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;

@@ -20,6 +20,11 @@
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-activemq</artifactId>
+        </dependency>
+
         <!--WEB支持-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -38,7 +43,6 @@
             <artifactId>tomcat-embed-jasper</artifactId>
             <scope>provided</scope>
         </dependency>
-
     </dependencies>
 
     <build>

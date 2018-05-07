@@ -1,8 +1,8 @@
-package own.stu.distributedTransaction.pay.web.message.controller.config;
+package own.stu.distributedTransaction.pay.web.messageSe.controller.config;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
-import own.stu.distributedTransaction.pay.web.message.controller.PayWebMessageApplication;
+import own.stu.distributedTransaction.pay.web.messageSe.controller.PayWebMessageApplication;
 
 /**
  * Created by dell on 2017/1/5.
