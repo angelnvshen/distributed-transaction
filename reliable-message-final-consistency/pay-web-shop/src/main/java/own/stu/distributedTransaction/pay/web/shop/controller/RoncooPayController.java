@@ -16,11 +16,15 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import own.stu.distributedTransaction.pay.web.shop.utils.MerchantApiUtil;
 import own.stu.distributedTransaction.pay.web.shop.utils.PayConfigUtil;
+import own.stu.distributedTransaction.pay.web.shop.utils.ReadPropertiesUtil;
 
 /**
  * <b>功能说明:龙果支付控制类
@@ -29,7 +33,10 @@ import own.stu.distributedTransaction.pay.web.shop.utils.PayConfigUtil;
 @Controller
 @RequestMapping(value = "/roncooPay")
 public class RoncooPayController  extends BaseController{
-	
+
+    @Autowired
+    ReadPropertiesUtil readPropertiesUtil;
+
     @RequestMapping("/scanPay")
     public String scanPay(HttpServletRequest httpServletRequest , HttpServletResponse httpServletResponse ,Model model){
         Map<String , Object> paramMap = new HashMap<String , Object>();
@@ -50,18 +57,18 @@ public class RoncooPayController  extends BaseController{
         String orderTimeStr =  new SimpleDateFormat("yyyyMMddHHmmss").format(orderTime);// 订单时间
         paramMap.put("orderTime",orderTimeStr);
 
-        paramMap.put("payKey", PayConfigUtil.readConfig("payKey"));
+        paramMap.put("payKey", readPropertiesUtil.getProperty("payKey"));
         String productName = getString_UrlDecode_UTF8("productName"); // 商品名称
         paramMap.put("productName",productName);
 
-        String orderIp = PayConfigUtil.readConfig("orderIp"); // 下单IP
+        String orderIp = readPropertiesUtil.getProperty("orderIp"); // 下单IP
         paramMap.put("orderIp",orderIp);
 
-        String orderPeriodStr = PayConfigUtil.readConfig("orderPeriod"); // 订单有效期
+        String orderPeriodStr = readPropertiesUtil.getProperty("orderPeriod"); // 订单有效期
         paramMap.put("orderPeriod",orderPeriodStr);
-        String returnUrl = PayConfigUtil.readConfig("returnUrl"); // 页面通知返回url
+        String returnUrl = readPropertiesUtil.getProperty("returnUrl"); // 页面通知返回url
         paramMap.put("returnUrl",returnUrl);
-        String notifyUrl = PayConfigUtil.readConfig("notifyUrl"); // 后台消息通知Url
+        String notifyUrl = readPropertiesUtil.getProperty("notifyUrl"); // 后台消息通知Url
         paramMap.put("notifyUrl",notifyUrl);
         String remark = getString_UrlDecode_UTF8("remark"); // 支付备注
         paramMap.put("remark",remark);
@@ -79,7 +86,7 @@ public class RoncooPayController  extends BaseController{
         paramMap.put("field5",field5);
 
         /////签名及生成请求API的方法///
-        String sign = MerchantApiUtil.getSign(paramMap, PayConfigUtil.readConfig("paySecret"));
+        String sign = MerchantApiUtil.getSign(paramMap, readPropertiesUtil.getProperty("paySecret"));
         paramMap.put("sign",sign);
 
         String buildRequest = MerchantApiUtil.buildRequest(paramMap, "get", "确定");

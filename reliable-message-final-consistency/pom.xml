@@ -19,6 +19,7 @@
 		<module>pay-service-user</module>
 		<module>pay-web-message-se</module>
         <module>pay-web-shop</module>
+        <module>pay-web-gateway</module>
     </modules>
 	<packaging>pom</packaging>
 

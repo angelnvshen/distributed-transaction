@@ -13,9 +13,9 @@ import org.springframework.jms.listener.SessionAwareMessageListener;
 
 import com.alibaba.fastjson.JSONObject;
 import own.stu.distributedTransaction.common.core.exception.BizException;
-import own.stu.distributedTransaction.pay.service.accounting.api.RpAccountingVoucherService;
-import own.stu.distributedTransaction.pay.service.accounting.entity.RpAccountingVoucher;
 import own.stu.distributedTransaction.pay.service.message.api.RpTransactionMessageService;
+import own.stu.distributedTransaction.pay.service.user.api.RpAccountingVoucherService;
+import own.stu.distributedTransaction.pay.service.user.entity.RpAccountingVoucher;
 
 public class AccountingMessageListener implements SessionAwareMessageListener<Message> {
 
