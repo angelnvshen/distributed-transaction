@@ -1,5 +1,6 @@
 package own.stu.distributedTransaction.pay.service.user.dao;
 
+import org.springframework.stereotype.Component;
 import own.stu.distributedTransaction.common.core.dao.MyMapper;
 import own.stu.distributedTransaction.pay.service.user.entity.RpAccountHistory;
 import own.stu.distributedTransaction.pay.service.user.vo.DailyCollectAccountHistoryVo;
@@ -7,6 +8,7 @@ import own.stu.distributedTransaction.pay.service.user.vo.DailyCollectAccountHis
 import java.util.List;
 import java.util.Map;
 
+@Component
 public interface RpAccountHistoryMapper extends MyMapper<RpAccountHistory> {
 
     List<RpAccountHistory> listPage(Map<String, Object> map);

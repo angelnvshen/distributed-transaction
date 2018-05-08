@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2014-2016 abel533@gmail.com
+ * Copyright (c) 2014-2019 abel533@gmail.com
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -26,7 +26,7 @@ package own.stu.distributedTransaction.usableServer.model;
 
 /**
  * @author liuzh_3nofxnp
- * @since 2016-01-22 22:16
+ * @since 2019-01-22 22:16
  */
 public class City extends BaseEntity {
     private String name;

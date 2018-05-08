@@ -36,7 +36,7 @@
         <javaClientGenerator targetPackage="own.stu.distributedTransaction.pay.service.user.dao" targetProject="src/main/java"
                              type="XMLMAPPER"/>
 
-        <table tableName="%rp_account">
+        <table tableName="%rp_accounting_voucher">
             <!--mysql 配置-->
             <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
             <!--oracle 配置-->

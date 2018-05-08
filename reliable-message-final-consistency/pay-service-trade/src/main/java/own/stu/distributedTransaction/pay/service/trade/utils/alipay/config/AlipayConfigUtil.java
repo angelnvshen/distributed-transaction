@@ -1,11 +1,4 @@
-/*
- * ====================================================================
- * 龙果学院： www.roncoo.com （微信公众号：RonCoo_com）
- * 超级教程系列：《微服务架构的分布式事务解决方案》视频教程
- * 讲师：吴水成（水到渠成），840765167@qq.com
- * 课程地址：http://www.roncoo.com/course/view/7ae3d7eddc4742f78b0548aa8bd9ccdb
- * ====================================================================
- */
+
 package own.stu.distributedTransaction.pay.service.trade.utils.alipay.config;
 
 /* *
@@ -13,7 +6,7 @@ package own.stu.distributedTransaction.pay.service.trade.utils.alipay.config;
  *功能：基础配置类
  *详细：设置帐户有关信息及返回路径
  *版本：3.4
- *修改日期：2016-03-08
+ *修改日期：2019-03-08
  *说明：
  *以下代码只是为了方便商户测试而提供的样例代码，商户可以根据自己网站的需要，按照技术文档编写,并非一定要使用该代码。
  *该代码仅供学习和研究支付宝接口使用，只是提供一个参考。

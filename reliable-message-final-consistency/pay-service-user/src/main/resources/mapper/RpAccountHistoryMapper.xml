@@ -65,7 +65,7 @@
   </select>
 
   <!-- 日汇总账户待结算金额  -->
-  <select id="listDailyCollectAccountHistoryVo" parameterType="java.util.Map" resultType="com.roncoo.pay.service.account.vo.DailyCollectAccountHistoryVo">
+  <select id="listDailyCollectAccountHistoryVo" parameterType="java.util.Map" resultType="own.stu.distributedTransaction.pay.service.user.vo.DailyCollectAccountHistoryVo">
     select
     account_no as "accountNo",
     sum(case when fund_direction = 'ADD' then amount else -amount end) as "totalAmount",

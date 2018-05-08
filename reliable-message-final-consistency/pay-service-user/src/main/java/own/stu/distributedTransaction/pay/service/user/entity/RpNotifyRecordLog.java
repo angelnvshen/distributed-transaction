@@ -1,64 +1,63 @@
-/*
- * ====================================================================
- * 龙果学院： www.roncoo.com （微信公众号：RonCoo_com）
- * 超级教程系列：《微服务架构的分布式事务解决方案》视频教程
- * 讲师：吴水成（水到渠成），840765167@qq.com
- * 课程地址：http://www.roncoo.com/course/view/7ae3d7eddc4742f78b0548aa8bd9ccdb
- * ====================================================================
- */
 package own.stu.distributedTransaction.pay.service.user.entity;
 
-import own.stu.distributedTransaction.common.core.entity.BaseEntity;
+import own.stu.distributedTransaction.common.core.utils.StringUtil;
 
-import java.io.Serializable;
+import javax.persistence.*;
 import java.util.Date;
 
-/**
- * @功能说明:
- * @创建者: Peter
- * @创建时间: 16/6/2  上午11:25
- * @公司名称:广州市领课网络科技有限公司 龙果学院(www.roncoo.com)
- * @版本:V1.0
- */
-public class RpNotifyRecordLog extends BaseEntity implements Serializable{
+@Table(name = "rp_notify_record_log")
+public class RpNotifyRecordLog {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private String id = StringUtil.get32UUID();// 主键ID.
+
+    private Integer version;
+
     /**
-     *
+     * 修改者
      */
-    private static final long serialVersionUID = 459406550725396000L;
+    private String editor;
 
-    /** 通知记录ID **/
-    private String notifyId;
+    /**
+     * 创建者
+     */
+    private String creater;
 
-    /** 请求信息 **/
-    private String request;
+    /**
+     * 最后修改时间
+     */
+    @Column(name = "edit_time")
+    private Date editTime;
 
-    /** 返回信息 **/
-    private String response;
-
-    /** 商户编号 **/
-    private String merchantNo;
-
-    /** 商户订单号 **/
-    private String merchantOrderNo;
-
-    /** HTTP状态 **/
-    private Integer httpStatus;
-
+    @Column(name = "create_time")
     private Date createTime;
 
-    public Date getCreateTime() {
-        return createTime;
-    }
+    @Column(name = "notify_id")
+    private String notifyId;
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
+    private String request;
+
+    private String response;
+
+    @Column(name = "merchant_no")
+    private String merchantNo;
+
+    /**
+     * 商户订单号
+     */
+    @Column(name = "merchant_order_no")
+    private String merchantOrderNo;
+
+    /**
+     * HTTP状态
+     */
+    @Column(name = "http_status")
+    private String httpStatus;
 
     public RpNotifyRecordLog() {
-        super();
     }
 
-    public RpNotifyRecordLog(Date createTime, String notifyId, String request, String response, String merchantNo, String merchantOrderNo, Integer httpStatus) {
+    public RpNotifyRecordLog(Date createTime, String notifyId, String request, String response, String merchantNo, String merchantOrderNo, String httpStatus){
         super();
         this.createTime = createTime;
         this.notifyId = notifyId;
@@ -68,65 +67,192 @@ public class RpNotifyRecordLog extends BaseEntity implements Serializable{
         this.merchantOrderNo = merchantOrderNo;
         this.httpStatus = httpStatus;
     }
+    
+    /**
+     * @return id
+     */
+    public String getId() {
+        return id;
+    }
 
-    /** 通知记录ID **/
+    /**
+     * @param id
+     */
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    /**
+     * @return version
+     */
+    public Integer getVersion() {
+        return version;
+    }
+
+    /**
+     * @param version
+     */
+    public void setVersion(Integer version) {
+        this.version = version;
+    }
+
+    /**
+     * 获取修改者
+     *
+     * @return editor - 修改者
+     */
+    public String getEditor() {
+        return editor;
+    }
+
+    /**
+     * 设置修改者
+     *
+     * @param editor 修改者
+     */
+    public void setEditor(String editor) {
+        this.editor = editor;
+    }
+
+    /**
+     * 获取创建者
+     *
+     * @return creater - 创建者
+     */
+    public String getCreater() {
+        return creater;
+    }
+
+    /**
+     * 设置创建者
+     *
+     * @param creater 创建者
+     */
+    public void setCreater(String creater) {
+        this.creater = creater;
+    }
+
+    /**
+     * 获取最后修改时间
+     *
+     * @return edit_time - 最后修改时间
+     */
+    public Date getEditTime() {
+        return editTime;
+    }
+
+    /**
+     * 设置最后修改时间
+     *
+     * @param editTime 最后修改时间
+     */
+    public void setEditTime(Date editTime) {
+        this.editTime = editTime;
+    }
+
+    /**
+     * @return create_time
+     */
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    /**
+     * @param createTime
+     */
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    /**
+     * @return notify_id
+     */
     public String getNotifyId() {
         return notifyId;
     }
 
-    /** 通知记录ID **/
+    /**
+     * @param notifyId
+     */
     public void setNotifyId(String notifyId) {
         this.notifyId = notifyId;
     }
 
-    /** 请求信息 **/
+    /**
+     * @return request
+     */
     public String getRequest() {
         return request;
     }
 
-    /** 请求信息 **/
+    /**
+     * @param request
+     */
     public void setRequest(String request) {
-        this.request = request == null ? null : request.trim();
+        this.request = request;
     }
 
-    /** 返回信息 **/
+    /**
+     * @return response
+     */
     public String getResponse() {
         return response;
     }
 
-    /** 返回信息 **/
+    /**
+     * @param response
+     */
     public void setResponse(String response) {
-        this.response = response == null ? null : response.trim();
+        this.response = response;
     }
 
-    /** 商户编号 **/
+    /**
+     * @return merchant_no
+     */
     public String getMerchantNo() {
         return merchantNo;
     }
 
-    /** 商户编号 **/
+    /**
+     * @param merchantNo
+     */
     public void setMerchantNo(String merchantNo) {
-        this.merchantNo = merchantNo == null ? null : merchantNo.trim();
+        this.merchantNo = merchantNo;
     }
 
-    /** 商户订单号 **/
+    /**
+     * 获取商户订单号
+     *
+     * @return merchant_order_no - 商户订单号
+     */
     public String getMerchantOrderNo() {
         return merchantOrderNo;
     }
 
-    /** 商户订单号 **/
+    /**
+     * 设置商户订单号
+     *
+     * @param merchantOrderNo 商户订单号
+     */
     public void setMerchantOrderNo(String merchantOrderNo) {
-        this.merchantOrderNo = merchantOrderNo == null ? null : merchantOrderNo.trim();
+        this.merchantOrderNo = merchantOrderNo;
     }
 
-    /** HTTP状态 **/
-    public Integer getHttpStatus() {
+    /**
+     * 获取HTTP状态
+     *
+     * @return http_status - HTTP状态
+     */
+    public String getHttpStatus() {
         return httpStatus;
     }
 
-    /** HTTP状态 **/
-    public void setHttpStatus(Integer httpStatus) {
+    /**
+     * 设置HTTP状态
+     *
+     * @param httpStatus HTTP状态
+     */
+    public void setHttpStatus(String httpStatus) {
         this.httpStatus = httpStatus;
     }
-
 }

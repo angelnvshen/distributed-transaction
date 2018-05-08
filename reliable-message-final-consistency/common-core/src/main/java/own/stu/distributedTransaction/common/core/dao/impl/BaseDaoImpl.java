@@ -1,11 +1,4 @@
-/*
- * ====================================================================
- * 龙果学院： www.roncoo.com
- * 超级教程系列：《微服务架构的分布式事务解决方案》 视频教程
- * 讲师：吴水成（水到渠成），840765167@qq.com
- * 课程地址：http://www.roncoo.com/details/7ae3d7eddc4742f78b0548aa8bd9ccdb
- * ====================================================================
- */
+
 package own.stu.distributedTransaction.common.core.dao.impl;
 
 import org.apache.commons.logging.Log;
@@ -27,13 +20,7 @@ import java.util.Map;
 
 /**
  * @类功能说明： 数据访问层基础支撑类.
- * @类修改者：
- * @修改日期：
- * @修改说明：
- * @公司名称：广州领课网络科技有限公司（龙果学院）
- * @作者：Along
- * @创建时间：2016-5-11 上午11:14:10
- * @版本：V1.0
+ * @创建时间：2019-5-11 上午11:14:10
  */
 public abstract class BaseDaoImpl<T extends BaseEntity> extends SqlSessionDaoSupport implements BaseDao<T> {
 
@@ -267,7 +254,7 @@ public abstract class BaseDaoImpl<T extends BaseEntity> extends SqlSessionDaoSup
     }
 
     /**
-     * 函数功能说明 ： 获取Mapper命名空间. 修改者名字： Along 修改日期： 2016-1-8 修改内容：
+     * 函数功能说明 ： 获取Mapper命名空间. 修改者名字： Along 修改日期： 2019-1-8 修改内容：
      * 
      * @参数：@param sqlId
      * @参数：@return

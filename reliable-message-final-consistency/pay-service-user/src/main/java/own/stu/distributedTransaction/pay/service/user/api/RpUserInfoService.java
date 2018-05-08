@@ -1,15 +1,9 @@
-/*
- * ====================================================================
- * 龙果学院： www.roncoo.com （微信公众号：RonCoo_com）
- * 超级教程系列：《微服务架构的分布式事务解决方案》视频教程
- * 讲师：吴水成（水到渠成），840765167@qq.com
- * 课程地址：http://www.roncoo.com/course/view/7ae3d7eddc4742f78b0548aa8bd9ccdb
- * ====================================================================
- */
+
 package own.stu.distributedTransaction.pay.service.user.api;
 
 import own.stu.distributedTransaction.common.core.page.PageBean;
 import own.stu.distributedTransaction.common.core.page.PageParam;
+import own.stu.distributedTransaction.common.core.service.IService;
 import own.stu.distributedTransaction.pay.service.user.entity.RpUserInfo;
 import own.stu.distributedTransaction.pay.service.user.exceptions.PayBizException;
 
@@ -20,39 +14,11 @@ import java.util.List;
  * @类修改者：
  * @修改日期：
  * @修改说明：
- * @公司名称：广州领课网络科技有限公司（龙果学院：www.roncoo.com）
+ * @公司名称：
  * @作者：zh
- * @创建时间：2016-5-18 上午11:14:10
- * @版本：V1.0
+ * @创建时间：2019-5-18 上午11:14:10
  */
-public interface RpUserInfoService{
-	
-	/**
-	 * 保存
-	 */
-	void saveData(RpUserInfo rpUserInfo) throws PayBizException;
-
-	/**
-	 * 更新
-	 */
-	void updateData(RpUserInfo rpUserInfo) throws PayBizException;
-
-	/**
-	 * 根据id获取数据
-	 * 
-	 * @param id
-	 * @return
-	 */
-	RpUserInfo getDataById(String id) throws PayBizException;
-	
-
-	/**
-	 * 获取分页数据
-	 * 
-	 * @param pageParam
-	 * @return
-	 */
-	PageBean listPage(PageParam pageParam, RpUserInfo rpUserInfo) throws PayBizException;
+public interface RpUserInfoService extends IService<RpUserInfo>{
 	
 	/**
      * 用户线下注册

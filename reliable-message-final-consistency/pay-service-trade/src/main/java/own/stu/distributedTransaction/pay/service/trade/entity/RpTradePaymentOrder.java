@@ -1,410 +1,871 @@
-/*
- * ====================================================================
- * 龙果学院： www.roncoo.com （微信公众号：RonCoo_com）
- * 超级教程系列：《微服务架构的分布式事务解决方案》视频教程
- * 讲师：吴水成（水到渠成），840765167@qq.com
- * 课程地址：http://www.roncoo.com/course/view/7ae3d7eddc4742f78b0548aa8bd9ccdb
- * ====================================================================
- */
 package own.stu.distributedTransaction.pay.service.trade.entity;
 
+import own.stu.distributedTransaction.common.core.utils.StringUtil;
 
-import own.stu.distributedTransaction.common.core.entity.BaseEntity;
-import own.stu.distributedTransaction.common.core.enums.PublicEnum;
-
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import javax.persistence.*;
 
-/**
- * @功能说明: 支付订单表
- * @创建者: Peter
- * @创建时间: 16/5/18  下午4:14
- * @公司名称:广州市领课网络科技有限公司 龙果学院(www.roncoo.com)
- * @版本:V1.0
- */
-public class RpTradePaymentOrder extends BaseEntity implements Serializable {
+@Table(name = "rp_trade_payment_order")
+public class RpTradePaymentOrder {
+    /**
+     * ID
+     */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private String id = StringUtil.get32UUID();// 主键ID.
 
     /**
-	 * 
-	 */
-	private static final long serialVersionUID = 7350571920098973424L;
+     * 版本号
+     */
+    private Integer version;
 
-	/** 商品名称 **/
+    /**
+     * 创建时间
+     */
+    @Column(name = "create_time")
+    private Date createTime;
+
+    /**
+     * 修改者
+     */
+    private String editor;
+
+    /**
+     * 创建者
+     */
+    private String creater;
+
+    /**
+     * 最后修改时间
+     */
+    @Column(name = "edit_time")
+    private Date editTime;
+
+    /**
+     * 状态(参考枚举:OrderStatusEnum)
+     */
+    private String status;
+
+    /**
+     * 商品名称
+     */
+    @Column(name = "product_name")
     private String productName;
 
-    /** 商户订单编号 **/
+    /**
+     * 商户订单号
+     */
+    @Column(name = "merchant_order_no")
     private String merchantOrderNo;
 
-    /** 订单金额 **/
+    /**
+     * 订单金额
+     */
+    @Column(name = "order_amount")
     private BigDecimal orderAmount;
 
-    /** 订单来源 **/
+    /**
+     * 订单来源
+     */
+    @Column(name = "order_from")
     private String orderFrom;
 
-    /** 商户名称 **/
+    /**
+     * 商家名称
+     */
+    @Column(name = "merchant_name")
     private String merchantName;
 
-    /** 商户编号 **/
+    /**
+     * 商户编号
+     */
+    @Column(name = "merchant_no")
     private String merchantNo;
 
-    /** 订单时间 **/
+    /**
+     * 下单时间
+     */
+    @Column(name = "order_time")
     private Date orderTime;
 
-    /** 订单日期 **/
+    /**
+     * 下单日期
+     */
+    @Column(name = "order_date")
     private Date orderDate;
 
-    /** 订单来源IP **/
+    /**
+     * 下单IP(客户端IP,在网关页面获取)
+     */
+    @Column(name = "order_ip")
     private String orderIp;
 
-    /** 页面链接 **/
+    /**
+     * 从哪个页面链接过来的(可用于防诈骗)
+     */
+    @Column(name = "order_referer_url")
     private String orderRefererUrl;
 
-    /** 页面回调通知地址 **/
+    /**
+     * 页面回调通知URL
+     */
+    @Column(name = "return_url")
     private String returnUrl;
 
-    /** 后台异步通知地址 **/
+    /**
+     * 后台异步通知URL
+     */
+    @Column(name = "notify_url")
     private String notifyUrl;
 
-    /** 订单撤销原因 **/
+    /**
+     * 订单撤销原因
+     */
+    @Column(name = "cancel_reason")
     private String cancelReason;
 
-    /** 订单有效期 **/
+    /**
+     * 订单有效期(单位分钟)
+     */
+    @Column(name = "order_period")
     private Integer orderPeriod;
 
-    /** 订单到期时间 **/
+    /**
+     * 到期时间
+     */
+    @Column(name = "expire_time")
     private Date expireTime;
 
-    /** 支付通道编号 **/
+    /**
+     * 支付通道编号
+     */
+    @Column(name = "pay_way_code")
     private String payWayCode;
 
-    /** 支付方式名称 **/
+    /**
+     * 支付通道名称
+     */
+    @Column(name = "pay_way_name")
     private String payWayName;
 
-    /** 备注 **/
+    /**
+     * 支付备注
+     */
     private String remark;
 
-    /** 交易业务类型 **/
+    /**
+     * 交易业务类型  ：消费、充值等
+     */
+    @Column(name = "trx_type")
     private String trxType;
 
-    /** 支付方式类型编码 **/
+    /**
+     * 支付方式类型编号
+     */
+    @Column(name = "pay_type_code")
     private String payTypeCode;
 
-    /** 支付方式类型名称 **/
+    /**
+     * 支付方式类型名称
+     */
+    @Column(name = "pay_type_name")
     private String payTypeName;
 
-    /** 资金流入类型 **/
+    /**
+     * 资金流入类型
+     */
+    @Column(name = "fund_into_type")
     private String fundIntoType;
 
-    /** 是否退款 **/
-    private String isRefund = PublicEnum.NO.name();
+    /**
+     * 是否退款(100:是,101:否,默认值为:101)
+     */
+    @Column(name = "is_refund")
+    private String isRefund;
 
-    /** 退款次数 **/
-    private Short refundTimes;
+    /**
+     * 退款次数(默认值为:0)
+     */
+    @Column(name = "refund_times")
+    private Integer refundTimes;
 
-    /** 成功退款金额 **/
+    /**
+     * 成功退款总金额
+     */
+    @Column(name = "success_refund_amount")
     private BigDecimal successRefundAmount;
 
-    /** 扩展字段1 **/
     private String field1;
 
-    /** 扩展字段2 **/
     private String field2;
 
-    /** 扩展字段3 **/
     private String field3;
 
-    /** 扩展字段4 **/
     private String field4;
 
-    /** 扩展字段5 **/
     private String field5;
 
+    @Column(name = "trx_no")
+    private String trxNo;
+
+    /**
+     * 获取ID
+     *
+     * @return id - ID
+     */
+    public String getId() {
+        return id;
+    }
+
+    /**
+     * 设置ID
+     *
+     * @param id ID
+     */
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    /**
+     * 获取版本号
+     *
+     * @return version - 版本号
+     */
+    public Integer getVersion() {
+        return version;
+    }
+
+    /**
+     * 设置版本号
+     *
+     * @param version 版本号
+     */
+    public void setVersion(Integer version) {
+        this.version = version;
+    }
+
+    /**
+     * 获取创建时间
+     *
+     * @return create_time - 创建时间
+     */
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    /**
+     * 设置创建时间
+     *
+     * @param createTime 创建时间
+     */
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    /**
+     * 获取修改者
+     *
+     * @return editor - 修改者
+     */
+    public String getEditor() {
+        return editor;
+    }
+
+    /**
+     * 设置修改者
+     *
+     * @param editor 修改者
+     */
+    public void setEditor(String editor) {
+        this.editor = editor;
+    }
+
+    /**
+     * 获取创建者
+     *
+     * @return creater - 创建者
+     */
+    public String getCreater() {
+        return creater;
+    }
+
+    /**
+     * 设置创建者
+     *
+     * @param creater 创建者
+     */
+    public void setCreater(String creater) {
+        this.creater = creater;
+    }
+
+    /**
+     * 获取最后修改时间
+     *
+     * @return edit_time - 最后修改时间
+     */
+    public Date getEditTime() {
+        return editTime;
+    }
+
+    /**
+     * 设置最后修改时间
+     *
+     * @param editTime 最后修改时间
+     */
+    public void setEditTime(Date editTime) {
+        this.editTime = editTime;
+    }
+
+    /**
+     * 获取状态(参考枚举:OrderStatusEnum)
+     *
+     * @return status - 状态(参考枚举:OrderStatusEnum)
+     */
+    public String getStatus() {
+        return status;
+    }
+
+    /**
+     * 设置状态(参考枚举:OrderStatusEnum)
+     *
+     * @param status 状态(参考枚举:OrderStatusEnum)
+     */
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    /**
+     * 获取商品名称
+     *
+     * @return product_name - 商品名称
+     */
     public String getProductName() {
         return productName;
     }
 
+    /**
+     * 设置商品名称
+     *
+     * @param productName 商品名称
+     */
     public void setProductName(String productName) {
-        this.productName = productName == null ? null : productName.trim();
+        this.productName = productName;
     }
 
+    /**
+     * 获取商户订单号
+     *
+     * @return merchant_order_no - 商户订单号
+     */
     public String getMerchantOrderNo() {
         return merchantOrderNo;
     }
 
+    /**
+     * 设置商户订单号
+     *
+     * @param merchantOrderNo 商户订单号
+     */
     public void setMerchantOrderNo(String merchantOrderNo) {
-        this.merchantOrderNo = merchantOrderNo == null ? null : merchantOrderNo.trim();
+        this.merchantOrderNo = merchantOrderNo;
     }
 
+    /**
+     * 获取订单金额
+     *
+     * @return order_amount - 订单金额
+     */
     public BigDecimal getOrderAmount() {
         return orderAmount;
     }
 
+    /**
+     * 设置订单金额
+     *
+     * @param orderAmount 订单金额
+     */
     public void setOrderAmount(BigDecimal orderAmount) {
         this.orderAmount = orderAmount;
     }
 
+    /**
+     * 获取订单来源
+     *
+     * @return order_from - 订单来源
+     */
     public String getOrderFrom() {
         return orderFrom;
     }
 
+    /**
+     * 设置订单来源
+     *
+     * @param orderFrom 订单来源
+     */
     public void setOrderFrom(String orderFrom) {
-        this.orderFrom = orderFrom == null ? null : orderFrom.trim();
+        this.orderFrom = orderFrom;
     }
 
+    /**
+     * 获取商家名称
+     *
+     * @return merchant_name - 商家名称
+     */
     public String getMerchantName() {
         return merchantName;
     }
 
+    /**
+     * 设置商家名称
+     *
+     * @param merchantName 商家名称
+     */
     public void setMerchantName(String merchantName) {
-        this.merchantName = merchantName == null ? null : merchantName.trim();
+        this.merchantName = merchantName;
     }
 
+    /**
+     * 获取商户编号
+     *
+     * @return merchant_no - 商户编号
+     */
     public String getMerchantNo() {
         return merchantNo;
     }
 
+    /**
+     * 设置商户编号
+     *
+     * @param merchantNo 商户编号
+     */
     public void setMerchantNo(String merchantNo) {
-        this.merchantNo = merchantNo == null ? null : merchantNo.trim();
+        this.merchantNo = merchantNo;
     }
 
+    /**
+     * 获取下单时间
+     *
+     * @return order_time - 下单时间
+     */
     public Date getOrderTime() {
         return orderTime;
     }
 
+    /**
+     * 设置下单时间
+     *
+     * @param orderTime 下单时间
+     */
     public void setOrderTime(Date orderTime) {
         this.orderTime = orderTime;
     }
 
+    /**
+     * 获取下单日期
+     *
+     * @return order_date - 下单日期
+     */
     public Date getOrderDate() {
         return orderDate;
     }
 
+    /**
+     * 设置下单日期
+     *
+     * @param orderDate 下单日期
+     */
     public void setOrderDate(Date orderDate) {
         this.orderDate = orderDate;
     }
 
+    /**
+     * 获取下单IP(客户端IP,在网关页面获取)
+     *
+     * @return order_ip - 下单IP(客户端IP,在网关页面获取)
+     */
     public String getOrderIp() {
         return orderIp;
     }
 
+    /**
+     * 设置下单IP(客户端IP,在网关页面获取)
+     *
+     * @param orderIp 下单IP(客户端IP,在网关页面获取)
+     */
     public void setOrderIp(String orderIp) {
-        this.orderIp = orderIp == null ? null : orderIp.trim();
+        this.orderIp = orderIp;
     }
 
+    /**
+     * 获取从哪个页面链接过来的(可用于防诈骗)
+     *
+     * @return order_referer_url - 从哪个页面链接过来的(可用于防诈骗)
+     */
     public String getOrderRefererUrl() {
         return orderRefererUrl;
     }
 
+    /**
+     * 设置从哪个页面链接过来的(可用于防诈骗)
+     *
+     * @param orderRefererUrl 从哪个页面链接过来的(可用于防诈骗)
+     */
     public void setOrderRefererUrl(String orderRefererUrl) {
-        this.orderRefererUrl = orderRefererUrl == null ? null : orderRefererUrl.trim();
+        this.orderRefererUrl = orderRefererUrl;
     }
 
+    /**
+     * 获取页面回调通知URL
+     *
+     * @return return_url - 页面回调通知URL
+     */
     public String getReturnUrl() {
         return returnUrl;
     }
 
+    /**
+     * 设置页面回调通知URL
+     *
+     * @param returnUrl 页面回调通知URL
+     */
     public void setReturnUrl(String returnUrl) {
-        this.returnUrl = returnUrl == null ? null : returnUrl.trim();
+        this.returnUrl = returnUrl;
     }
 
+    /**
+     * 获取后台异步通知URL
+     *
+     * @return notify_url - 后台异步通知URL
+     */
     public String getNotifyUrl() {
         return notifyUrl;
     }
 
+    /**
+     * 设置后台异步通知URL
+     *
+     * @param notifyUrl 后台异步通知URL
+     */
     public void setNotifyUrl(String notifyUrl) {
-        this.notifyUrl = notifyUrl == null ? null : notifyUrl.trim();
+        this.notifyUrl = notifyUrl;
     }
 
+    /**
+     * 获取订单撤销原因
+     *
+     * @return cancel_reason - 订单撤销原因
+     */
     public String getCancelReason() {
         return cancelReason;
     }
 
+    /**
+     * 设置订单撤销原因
+     *
+     * @param cancelReason 订单撤销原因
+     */
     public void setCancelReason(String cancelReason) {
-        this.cancelReason = cancelReason == null ? null : cancelReason.trim();
+        this.cancelReason = cancelReason;
     }
 
+    /**
+     * 获取订单有效期(单位分钟)
+     *
+     * @return order_period - 订单有效期(单位分钟)
+     */
     public Integer getOrderPeriod() {
         return orderPeriod;
     }
 
+    /**
+     * 设置订单有效期(单位分钟)
+     *
+     * @param orderPeriod 订单有效期(单位分钟)
+     */
     public void setOrderPeriod(Integer orderPeriod) {
         this.orderPeriod = orderPeriod;
     }
 
+    /**
+     * 获取到期时间
+     *
+     * @return expire_time - 到期时间
+     */
     public Date getExpireTime() {
         return expireTime;
     }
 
+    /**
+     * 设置到期时间
+     *
+     * @param expireTime 到期时间
+     */
     public void setExpireTime(Date expireTime) {
         this.expireTime = expireTime;
     }
 
+    /**
+     * 获取支付通道编号
+     *
+     * @return pay_way_code - 支付通道编号
+     */
     public String getPayWayCode() {
         return payWayCode;
     }
 
+    /**
+     * 设置支付通道编号
+     *
+     * @param payWayCode 支付通道编号
+     */
     public void setPayWayCode(String payWayCode) {
-        this.payWayCode = payWayCode == null ? null : payWayCode.trim();
+        this.payWayCode = payWayCode;
     }
 
+    /**
+     * 获取支付通道名称
+     *
+     * @return pay_way_name - 支付通道名称
+     */
     public String getPayWayName() {
         return payWayName;
     }
 
+    /**
+     * 设置支付通道名称
+     *
+     * @param payWayName 支付通道名称
+     */
     public void setPayWayName(String payWayName) {
-        this.payWayName = payWayName == null ? null : payWayName.trim();
+        this.payWayName = payWayName;
     }
 
+    /**
+     * 获取支付备注
+     *
+     * @return remark - 支付备注
+     */
     public String getRemark() {
         return remark;
     }
 
+    /**
+     * 设置支付备注
+     *
+     * @param remark 支付备注
+     */
     public void setRemark(String remark) {
-        this.remark = remark == null ? null : remark.trim();
+        this.remark = remark;
     }
 
+    /**
+     * 获取交易业务类型  ：消费、充值等
+     *
+     * @return trx_type - 交易业务类型  ：消费、充值等
+     */
     public String getTrxType() {
         return trxType;
     }
 
+    /**
+     * 设置交易业务类型  ：消费、充值等
+     *
+     * @param trxType 交易业务类型  ：消费、充值等
+     */
     public void setTrxType(String trxType) {
-        this.trxType = trxType == null ? null : trxType.trim();
+        this.trxType = trxType;
     }
 
+    /**
+     * 获取支付方式类型编号
+     *
+     * @return pay_type_code - 支付方式类型编号
+     */
     public String getPayTypeCode() {
         return payTypeCode;
     }
 
+    /**
+     * 设置支付方式类型编号
+     *
+     * @param payTypeCode 支付方式类型编号
+     */
     public void setPayTypeCode(String payTypeCode) {
-        this.payTypeCode = payTypeCode == null ? null : payTypeCode.trim();
+        this.payTypeCode = payTypeCode;
     }
 
+    /**
+     * 获取支付方式类型名称
+     *
+     * @return pay_type_name - 支付方式类型名称
+     */
     public String getPayTypeName() {
         return payTypeName;
     }
 
+    /**
+     * 设置支付方式类型名称
+     *
+     * @param payTypeName 支付方式类型名称
+     */
     public void setPayTypeName(String payTypeName) {
-        this.payTypeName = payTypeName == null ? null : payTypeName.trim();
+        this.payTypeName = payTypeName;
     }
 
+    /**
+     * 获取资金流入类型
+     *
+     * @return fund_into_type - 资金流入类型
+     */
     public String getFundIntoType() {
         return fundIntoType;
     }
 
+    /**
+     * 设置资金流入类型
+     *
+     * @param fundIntoType 资金流入类型
+     */
     public void setFundIntoType(String fundIntoType) {
-        this.fundIntoType = fundIntoType == null ? null : fundIntoType.trim();
+        this.fundIntoType = fundIntoType;
     }
 
+    /**
+     * 获取是否退款(100:是,101:否,默认值为:101)
+     *
+     * @return is_refund - 是否退款(100:是,101:否,默认值为:101)
+     */
     public String getIsRefund() {
         return isRefund;
     }
 
+    /**
+     * 设置是否退款(100:是,101:否,默认值为:101)
+     *
+     * @param isRefund 是否退款(100:是,101:否,默认值为:101)
+     */
     public void setIsRefund(String isRefund) {
-        this.isRefund = isRefund == null ? null : isRefund.trim();
+        this.isRefund = isRefund;
     }
 
-    public Short getRefundTimes() {
+    /**
+     * 获取退款次数(默认值为:0)
+     *
+     * @return refund_times - 退款次数(默认值为:0)
+     */
+    public Integer getRefundTimes() {
         return refundTimes;
     }
 
-    public void setRefundTimes(Short refundTimes) {
+    /**
+     * 设置退款次数(默认值为:0)
+     *
+     * @param refundTimes 退款次数(默认值为:0)
+     */
+    public void setRefundTimes(Integer refundTimes) {
         this.refundTimes = refundTimes;
     }
 
+    /**
+     * 获取成功退款总金额
+     *
+     * @return success_refund_amount - 成功退款总金额
+     */
     public BigDecimal getSuccessRefundAmount() {
         return successRefundAmount;
     }
 
+    /**
+     * 设置成功退款总金额
+     *
+     * @param successRefundAmount 成功退款总金额
+     */
     public void setSuccessRefundAmount(BigDecimal successRefundAmount) {
         this.successRefundAmount = successRefundAmount;
     }
 
+    /**
+     * @return field1
+     */
     public String getField1() {
         return field1;
     }
 
+    /**
+     * @param field1
+     */
     public void setField1(String field1) {
-        this.field1 = field1 == null ? null : field1.trim();
+        this.field1 = field1;
     }
 
+    /**
+     * @return field2
+     */
     public String getField2() {
         return field2;
     }
 
+    /**
+     * @param field2
+     */
     public void setField2(String field2) {
-        this.field2 = field2 == null ? null : field2.trim();
+        this.field2 = field2;
     }
 
+    /**
+     * @return field3
+     */
     public String getField3() {
         return field3;
     }
 
+    /**
+     * @param field3
+     */
     public void setField3(String field3) {
-        this.field3 = field3 == null ? null : field3.trim();
+        this.field3 = field3;
     }
 
+    /**
+     * @return field4
+     */
     public String getField4() {
         return field4;
     }
 
+    /**
+     * @param field4
+     */
     public void setField4(String field4) {
-        this.field4 = field4 == null ? null : field4.trim();
+        this.field4 = field4;
     }
 
+    /**
+     * @return field5
+     */
     public String getField5() {
         return field5;
     }
 
+    /**
+     * @param field5
+     */
     public void setField5(String field5) {
-        this.field5 = field5 == null ? null : field5.trim();
+        this.field5 = field5;
     }
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(super.getId());
-        sb.append(", version=").append(super.getVersion());
-        sb.append(", createTime=").append(super.getCreateTime());
-        sb.append(", editor=").append(super.getEditor());
-        sb.append(", creater=").append(super.getCreater());
-        sb.append(", editTime=").append(super.getEditTime());
-        sb.append(", status=").append(super.getStatus());
-        sb.append(", productName=").append(productName);
-        sb.append(", merchantOrderNo=").append(merchantOrderNo);
-        sb.append(", orderAmount=").append(orderAmount);
-        sb.append(", orderFrom=").append(orderFrom);
-        sb.append(", merchantName=").append(merchantName);
-        sb.append(", merchantNo=").append(merchantNo);
-        sb.append(", orderTime=").append(orderTime);
-        sb.append(", orderDate=").append(orderDate);
-        sb.append(", orderIp=").append(orderIp);
-        sb.append(", orderRefererUrl=").append(orderRefererUrl);
-        sb.append(", returnUrl=").append(returnUrl);
-        sb.append(", notifyUrl=").append(notifyUrl);
-        sb.append(", cancelReason=").append(cancelReason);
-        sb.append(", orderPeriod=").append(orderPeriod);
-        sb.append(", expireTime=").append(expireTime);
-        sb.append(", payWayCode=").append(payWayCode);
-        sb.append(", payWayName=").append(payWayName);
-        sb.append(", remark=").append(remark);
-        sb.append(", trxType=").append(trxType);
-        sb.append(", payTypeCode=").append(payTypeCode);
-        sb.append(", payTypeName=").append(payTypeName);
-        sb.append(", fundIntoType=").append(fundIntoType);
-        sb.append(", isRefund=").append(isRefund);
-        sb.append(", refundTimes=").append(refundTimes);
-        sb.append(", successRefundAmount=").append(successRefundAmount);
-        sb.append(", field1=").append(field1);
-        sb.append(", field2=").append(field2);
-        sb.append(", field3=").append(field3);
-        sb.append(", field4=").append(field4);
-        sb.append(", field5=").append(field5);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
-        sb.append("]");
-        return sb.toString();
+    /**
+     * @return trx_no
+     */
+    public String getTrxNo() {
+        return trxNo;
+    }
+
+    /**
+     * @param trxNo
+     */
+    public void setTrxNo(String trxNo) {
+        this.trxNo = trxNo;
     }
 }

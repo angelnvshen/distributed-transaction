@@ -53,6 +53,19 @@ public class RpAccount {
     @Column(name = "user_no")
     private String userNo;
 
+    /************************* just show ************************************/
+    private String userName;
+    /************************* just show ************************************/
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+
     /**
      * @return id
      */

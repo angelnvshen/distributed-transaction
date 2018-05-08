@@ -1,53 +1,51 @@
-/*
- * ====================================================================
- * 龙果学院： www.roncoo.com （微信公众号：RonCoo_com）
- * 超级教程系列：《微服务架构的分布式事务解决方案》视频教程
- * 讲师：吴水成（水到渠成），840765167@qq.com
- * 课程地址：http://www.roncoo.com/course/view/7ae3d7eddc4742f78b0548aa8bd9ccdb
- * ====================================================================
- */
+
 package own.stu.distributedTransaction.pay.service.user.api.impl;
 
-import java.util.Map;
-
-import javax.jms.JMSException;
-import javax.jms.Message;
-import javax.jms.Session;
-
+import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.core.MessageCreator;
 import org.springframework.stereotype.Service;
-
-import com.alibaba.fastjson.JSONObject;
 import own.stu.distributedTransaction.common.core.page.PageBean;
 import own.stu.distributedTransaction.common.core.page.PageParam;
 import own.stu.distributedTransaction.pay.service.user.api.RpNotifyService;
-import own.stu.distributedTransaction.pay.service.user.dao.RpNotifyRecordDao;
-import own.stu.distributedTransaction.pay.service.user.dao.RpNotifyRecordLogDao;
+import own.stu.distributedTransaction.pay.service.user.dao.RpNotifyRecordLogMapper;
+import own.stu.distributedTransaction.pay.service.user.dao.RpNotifyRecordMapper;
 import own.stu.distributedTransaction.pay.service.user.entity.RpNotifyRecord;
 import own.stu.distributedTransaction.pay.service.user.entity.RpNotifyRecordLog;
 import own.stu.distributedTransaction.pay.service.user.enums.NotifyStatusEnum;
 import own.stu.distributedTransaction.pay.service.user.enums.NotifyTypeEnum;
 
+import javax.jms.JMSException;
+import javax.jms.Message;
+import javax.jms.Session;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /**
  * @功能说明:
- * @创建者: Peter
+ * @创建者:
  * @创建时间: 16/6/2  上午10:42
- * @公司名称:广州市领课网络科技有限公司 龙果学院(www.roncoo.com)
- * @版本:V1.0
+ * @公司名称:
+ * @版本:
  */
-@Service("rpNotifyService")
+@Service
 public class RpNotifyServiceImpl implements RpNotifyService {
 
     @Autowired
     private JmsTemplate notifyJmsTemplate;
 
     @Autowired
-    private RpNotifyRecordDao rpNotifyRecordDao;
+    //private RpNotifyRecordDao rpNotifyRecordDao;
+    private RpNotifyRecordMapper rpNotifyRecordDao;
 
     @Autowired
-    private RpNotifyRecordLogDao rpNotifyRecordLogDao;
+    //private RpNotifyRecordLogDao rpNotifyRecordLogDao;
+    private RpNotifyRecordLogMapper rpNotifyRecordLogDao;
+
     /**
      * 发送消息通知
      *
@@ -85,7 +83,7 @@ public class RpNotifyServiceImpl implements RpNotifyService {
      */
     @Override
     public RpNotifyRecord getNotifyRecordById(String id) {
-        return rpNotifyRecordDao.getById(id);
+        return rpNotifyRecordDao.selectByPrimaryKey(id);
     }
 
     /**
@@ -98,12 +96,23 @@ public class RpNotifyServiceImpl implements RpNotifyService {
      */
     @Override
     public RpNotifyRecord getNotifyByMerchantNoAndMerchantOrderNoAndNotifyType(String merchantNo, String merchantOrderNo, String notifyType) {
-        return rpNotifyRecordDao.getNotifyByMerchantNoAndMerchantOrderNoAndNotifyType(merchantNo,merchantOrderNo,notifyType);
+
+        Map<String, Object> paramMap = new HashMap<String, Object>();
+        paramMap.put("merchantNo", merchantNo);
+        paramMap.put("merchantOrderNo", merchantOrderNo);
+        paramMap.put("notifyType", notifyType);
+        List<RpNotifyRecord> list = rpNotifyRecordDao.listPage(paramMap);
+        return list.get(0);
     }
 
     @Override
     public PageBean<RpNotifyRecord> queryNotifyRecordListPage(PageParam pageParam, Map<String, Object> paramMap) {
-        return rpNotifyRecordDao.listPage(pageParam,paramMap);
+
+        PageHelper.startPage(pageParam.getPageNum(), pageParam.getNumPerPage());
+        List<RpNotifyRecord> list = rpNotifyRecordDao.listPage(paramMap);
+        PageInfo info = new PageInfo<RpNotifyRecord>(list);
+
+        return new PageBean(pageParam.getPageNum(), pageParam.getNumPerPage(), (int) info.getTotal(), info.getList());
     }
 
     /**
@@ -123,7 +132,7 @@ public class RpNotifyServiceImpl implements RpNotifyService {
      */
     @Override
     public void updateNotifyRecord(RpNotifyRecord rpNotifyRecord) {
-        rpNotifyRecordDao.update(rpNotifyRecord);
+        rpNotifyRecordDao.updateByPrimaryKeySelective(rpNotifyRecord);
     }
 
     /**

@@ -1,133 +1,274 @@
-/*
- * ====================================================================
- * 龙果学院： www.roncoo.com （微信公众号：RonCoo_com）
- * 超级教程系列：《微服务架构的分布式事务解决方案》视频教程
- * 讲师：吴水成（水到渠成），840765167@qq.com
- * 课程地址：http://www.roncoo.com/course/view/7ae3d7eddc4742f78b0548aa8bd9ccdb
- * ====================================================================
- */
 package own.stu.distributedTransaction.pay.service.user.entity;
 
-import java.io.Serializable;
+import java.util.Date;
+import javax.persistence.*;
 
-import own.stu.distributedTransaction.common.core.entity.BaseEntity;
+@Table(name = "rp_user_pay_info")
+public class RpUserPayInfo {
+    @Id
+    @Column(name = "id_")
+    private String id;
 
-/**
- * @类功能说明：用户第三方支付信息实体类
- * @类修改者：
- * @修改日期：
- * @修改说明：
- * @公司名称：广州领课网络科技有限公司（龙果学院：www.roncoo.com）
- * @作者：zh
- * @创建时间：2016-5-18 上午11:14:10
- * @版本：V1.0
- */
-public class RpUserPayInfo extends BaseEntity implements Serializable {
+    @Column(name = "create_time")
+    private Date createTime;
 
-	/**
-	 * 对应关系
-	 * 微信：appid
-	 * 支付宝：partner
-	 */
+    @Column(name = "edit_time")
+    private Date editTime;
+
+    private Long version;
+
+    private String remark;
+
+    private String status;
+
+    @Column(name = "app_id")
     private String appId;
 
+    @Column(name = "app_sectet")
     private String appSectet;
 
-    /**
-     * 对应关系
-     * 微信：merchantid
-     * 支付宝：seller_id
-     */
+    @Column(name = "merchant_id")
     private String merchantId;
 
+    @Column(name = "app_type")
     private String appType;
 
+    @Column(name = "user_no")
     private String userNo;
 
+    @Column(name = "user_name")
     private String userName;
-    
-    /**
-     * 对应关系
-     * 微信：partnerkey
-     * 支付宝：key
-     */
+
+    @Column(name = "partner_key")
     private String partnerKey;
-    
+
+    /**
+     * 支付方式编号
+     */
+    @Column(name = "pay_way_code")
     private String payWayCode;
 
+    /**
+     * 支付方式名称
+     */
+    @Column(name = "pay_way_name")
     private String payWayName;
 
-    public String getPayWayCode() {
-		return payWayCode;
-	}
+    /**
+     * @return id_
+     */
+    public String getId() {
+        return id;
+    }
 
-	public void setPayWayCode(String payWayCode) {
-		this.payWayCode = payWayCode;
-	}
+    /**
+     * @param id
+     */
+    public void setId(String id) {
+        this.id = id;
+    }
 
-	public String getPayWayName() {
-		return payWayName;
-	}
+    /**
+     * @return create_time
+     */
+    public Date getCreateTime() {
+        return createTime;
+    }
 
-	public void setPayWayName(String payWayName) {
-		this.payWayName = payWayName;
-	}
+    /**
+     * @param createTime
+     */
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
 
-	public String getPartnerKey() {
-		return partnerKey;
-	}
+    /**
+     * @return edit_time
+     */
+    public Date getEditTime() {
+        return editTime;
+    }
 
-	public void setPartnerKey(String partnerKey) {
-		this.partnerKey = partnerKey;
-	}
+    /**
+     * @param editTime
+     */
+    public void setEditTime(Date editTime) {
+        this.editTime = editTime;
+    }
 
-	private static final long serialVersionUID = 1L;
+    /**
+     * @return version
+     */
+    public Long getVersion() {
+        return version;
+    }
 
+    /**
+     * @param version
+     */
+    public void setVersion(Long version) {
+        this.version = version;
+    }
+
+    /**
+     * @return remark
+     */
+    public String getRemark() {
+        return remark;
+    }
+
+    /**
+     * @param remark
+     */
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    /**
+     * @return status
+     */
+    public String getStatus() {
+        return status;
+    }
+
+    /**
+     * @param status
+     */
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    /**
+     * @return app_id
+     */
     public String getAppId() {
         return appId;
     }
 
+    /**
+     * @param appId
+     */
     public void setAppId(String appId) {
-        this.appId = appId == null ? null : appId.trim();
+        this.appId = appId;
     }
 
+    /**
+     * @return app_sectet
+     */
     public String getAppSectet() {
         return appSectet;
     }
 
+    /**
+     * @param appSectet
+     */
     public void setAppSectet(String appSectet) {
-        this.appSectet = appSectet == null ? null : appSectet.trim();
+        this.appSectet = appSectet;
     }
 
+    /**
+     * @return merchant_id
+     */
     public String getMerchantId() {
         return merchantId;
     }
 
+    /**
+     * @param merchantId
+     */
     public void setMerchantId(String merchantId) {
-        this.merchantId = merchantId == null ? null : merchantId.trim();
+        this.merchantId = merchantId;
     }
 
+    /**
+     * @return app_type
+     */
     public String getAppType() {
         return appType;
     }
 
+    /**
+     * @param appType
+     */
     public void setAppType(String appType) {
-        this.appType = appType == null ? null : appType.trim();
+        this.appType = appType;
     }
 
+    /**
+     * @return user_no
+     */
     public String getUserNo() {
         return userNo;
     }
 
+    /**
+     * @param userNo
+     */
     public void setUserNo(String userNo) {
-        this.userNo = userNo == null ? null : userNo.trim();
+        this.userNo = userNo;
     }
 
+    /**
+     * @return user_name
+     */
     public String getUserName() {
         return userName;
     }
 
+    /**
+     * @param userName
+     */
     public void setUserName(String userName) {
-        this.userName = userName == null ? null : userName.trim();
+        this.userName = userName;
+    }
+
+    /**
+     * @return partner_key
+     */
+    public String getPartnerKey() {
+        return partnerKey;
+    }
+
+    /**
+     * @param partnerKey
+     */
+    public void setPartnerKey(String partnerKey) {
+        this.partnerKey = partnerKey;
+    }
+
+    /**
+     * 获取支付方式编号
+     *
+     * @return pay_way_code - 支付方式编号
+     */
+    public String getPayWayCode() {
+        return payWayCode;
+    }
+
+    /**
+     * 设置支付方式编号
+     *
+     * @param payWayCode 支付方式编号
+     */
+    public void setPayWayCode(String payWayCode) {
+        this.payWayCode = payWayCode;
+    }
+
+    /**
+     * 获取支付方式名称
+     *
+     * @return pay_way_name - 支付方式名称
+     */
+    public String getPayWayName() {
+        return payWayName;
+    }
+
+    /**
+     * 设置支付方式名称
+     *
+     * @param payWayName 支付方式名称
+     */
+    public void setPayWayName(String payWayName) {
+        this.payWayName = payWayName;
     }
 }

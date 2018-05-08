@@ -1,16 +1,5 @@
-/*
- * ====================================================================
- * 龙果学院： www.roncoo.com （微信公众号：RonCoo_com）
- * 超级教程系列：《微服务架构的分布式事务解决方案》视频教程
- * 讲师：吴水成（水到渠成），840765167@qq.com
- * 课程地址：http://www.roncoo.com/course/view/7ae3d7eddc4742f78b0548aa8bd9ccdb
- * ====================================================================
- */
-package own.stu.distributedTransaction.pay.service.user.api.impl;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+package own.stu.distributedTransaction.pay.service.user.api.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -20,42 +9,42 @@ import own.stu.distributedTransaction.common.core.page.PageBean;
 import own.stu.distributedTransaction.common.core.page.PageParam;
 import own.stu.distributedTransaction.common.core.service.impl.BaseService;
 import own.stu.distributedTransaction.pay.service.user.api.RpAccountService;
-import own.stu.distributedTransaction.pay.service.user.dao.RpAccountDao;
 import own.stu.distributedTransaction.pay.service.user.dao.RpAccountMapper;
 import own.stu.distributedTransaction.pay.service.user.entity.RpAccount;
-import own.stu.distributedTransaction.pay.service.user.entity.RpAccountHistory;
-import own.stu.distributedTransaction.pay.service.user.entity.RpAccount_bak;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @类功能说明： 账户service实现类
  * @类修改者：
  * @修改日期：
  * @修改说明：
- * @公司名称：广州领课网络科技有限公司（龙果学院：www.roncoo.com）
+ * @公司名称：
  * @作者：zh
- * @创建时间：2016-5-18 上午11:14:10
- * @版本：V1.0
+ * @创建时间：2019-5-18 上午11:14:10
  */
-@Service("rpAccountService")
+@Service
 public class RpAccountServiceImpl extends BaseService<RpAccount> implements RpAccountService {
 
-	@Autowired
-	private RpAccountMapper rpAccountDao;
-	
-	@Override
-	public PageBean listPage(PageParam pageParam, RpAccount rpAccount) {
+    @Autowired
+    private RpAccountMapper rpAccountDao;
 
-		Map<String, Object> paramMap = new HashMap<String, Object>();
-		paramMap.put("accountNo", rpAccount.getAccountNo());
-		return listPage(pageParam, paramMap);
-	}
+    @Override
+    public PageBean listPage(PageParam pageParam, RpAccount rpAccount) {
 
-	public PageBean listPage(PageParam pageParam, Map<String, Object> paramMap) {
+        Map<String, Object> paramMap = new HashMap<String, Object>();
+        paramMap.put("accountNo", rpAccount.getAccountNo());
+        return listPage(pageParam, paramMap);
+    }
 
-		PageHelper.startPage(pageParam.getPageNum(), pageParam.getNumPerPage());
-		List<RpAccount> list = rpAccountDao.listPage(paramMap);
-		PageInfo info = new PageInfo<RpAccount>(list);
+    public PageBean listPage(PageParam pageParam, Map<String, Object> paramMap) {
 
-		return new PageBean(pageParam.getPageNum(), pageParam.getNumPerPage(), (int)info.getTotal(), info.getList());
-	}
+        PageHelper.startPage(pageParam.getPageNum(), pageParam.getNumPerPage());
+        List<RpAccount> list = rpAccountDao.listPage(paramMap);
+        PageInfo info = new PageInfo<RpAccount>(list);
+
+        return new PageBean(pageParam.getPageNum(), pageParam.getNumPerPage(), (int) info.getTotal(), info.getList());
+    }
 }

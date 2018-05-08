@@ -1,65 +1,116 @@
-/*
- * ====================================================================
- * 龙果学院： www.roncoo.com （微信公众号：RonCoo_com）
- * 超级教程系列：《微服务架构的分布式事务解决方案》视频教程
- * 讲师：吴水成（水到渠成），840765167@qq.com
- * 课程地址：http://www.roncoo.com/course/view/7ae3d7eddc4742f78b0548aa8bd9ccdb
- * ====================================================================
- */
 package own.stu.distributedTransaction.pay.service.user.entity;
 
-import java.io.Serializable;
-
-import own.stu.distributedTransaction.common.core.entity.BaseEntity;
 import own.stu.distributedTransaction.common.core.enums.PublicStatusEnum;
+import own.stu.distributedTransaction.common.core.utils.StringUtil;
 
-/**
- * @类功能说明： 支付产品实体类
- * @类修改者：
- * @修改日期：
- * @修改说明：
- * @公司名称：广州领课网络科技有限公司（龙果学院：www.roncoo.com）
- * @作者：zh
- * @创建时间：2016-5-18 上午11:14:10
- * @版本：V1.0
- */
-public class RpUserInfo extends BaseEntity implements Serializable {
+import java.util.Date;
+import javax.persistence.*;
 
+@Table(name = "rp_user_info")
+public class RpUserInfo {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private String id = StringUtil.get32UUID();// 主键ID.
+
+    @Column(name = "create_time")
+    private Date createTime;
+
+    private String status;
+
+    @Column(name = "user_no")
     private String userNo;
 
+    @Column(name = "user_name")
     private String userName;
 
+    @Column(name = "account_no")
     private String accountNo;
 
-    private static final long serialVersionUID = 1L;
+    /**
+     * @return id
+     */
+    public String getId() {
+        return id;
+    }
 
+    /**
+     * @param id
+     */
+    public void setId(String id) {
+        this.id = id;
+    }
 
+    /**
+     * @return create_time
+     */
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    /**
+     * @param createTime
+     */
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    /**
+     * @return status
+     */
+    public String getStatus() {
+        return status;
+    }
+
+    /**
+     * @param status
+     */
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    /**
+     * @return user_no
+     */
     public String getUserNo() {
         return userNo;
     }
 
+    /**
+     * @param userNo
+     */
     public void setUserNo(String userNo) {
-        this.userNo = userNo == null ? null : userNo.trim();
+        this.userNo = userNo;
     }
 
+    /**
+     * @return user_name
+     */
     public String getUserName() {
         return userName;
     }
 
+    /**
+     * @param userName
+     */
     public void setUserName(String userName) {
-        this.userName = userName == null ? null : userName.trim();
+        this.userName = userName;
     }
 
+    /**
+     * @return account_no
+     */
     public String getAccountNo() {
         return accountNo;
     }
 
+    /**
+     * @param accountNo
+     */
     public void setAccountNo(String accountNo) {
-        this.accountNo = accountNo == null ? null : accountNo.trim();
+        this.accountNo = accountNo;
     }
-    
+
     public String getStatusDesc() {
         return PublicStatusEnum.getEnum(this.getStatus()).getDesc();
     }
-
 }

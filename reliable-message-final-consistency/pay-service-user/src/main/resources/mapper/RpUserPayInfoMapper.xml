@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="own.stu.distributedTransaction.pay.service.user.dao.RpUserPayInfoMapper">
+  <resultMap id="BaseResultMap" type="own.stu.distributedTransaction.pay.service.user.entity.RpUserPayInfo">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id_" jdbcType="VARCHAR" property="id" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="edit_time" jdbcType="TIMESTAMP" property="editTime" />
+    <result column="version" jdbcType="BIGINT" property="version" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="app_id" jdbcType="VARCHAR" property="appId" />
+    <result column="app_sectet" jdbcType="VARCHAR" property="appSectet" />
+    <result column="merchant_id" jdbcType="VARCHAR" property="merchantId" />
+    <result column="app_type" jdbcType="VARCHAR" property="appType" />
+    <result column="user_no" jdbcType="VARCHAR" property="userNo" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="partner_key" jdbcType="VARCHAR" property="partnerKey" />
+    <result column="pay_way_code" jdbcType="VARCHAR" property="payWayCode" />
+    <result column="pay_way_name" jdbcType="VARCHAR" property="payWayName" />
+  </resultMap>
+
+  <sql id="table_name">  rp_user_pay_info </sql>
+
+  <!-- 根据搜索条件获取数据 -->
+  <sql id="condition_sql">
+    <if test="userNo != null and userNo != ''">
+      and   user_no = #{userNo,jdbcType=VARCHAR}
+    </if>
+    <if test="payWayCode != null and payWayCode != ''">
+      and   pay_way_code = #{payWayCode,jdbcType=VARCHAR}
+    </if>
+  </sql>
+
+  <!-- 分页查询 -->
+  <select id="listPage" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select * from
+    <include refid="table_name" />
+    <where>
+      <include refid="condition_sql" />
+    </where>
+    order by create_time desc
+  </select>
+</mapper>

@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2014-2016 abel533@gmail.com
+ * Copyright (c) 2014-2019 abel533@gmail.com
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -30,7 +30,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 /**
  * @author liuzh
- * @since 2015-12-19 16:16
+ * @since 2018-12-19 16:16
  */
 @Configuration
 public class WebMvcConfig extends WebMvcConfigurerAdapter {

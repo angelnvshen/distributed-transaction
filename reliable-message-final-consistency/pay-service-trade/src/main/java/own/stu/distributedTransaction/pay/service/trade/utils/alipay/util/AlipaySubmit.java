@@ -1,11 +1,4 @@
-/*
- * ====================================================================
- * 龙果学院： www.roncoo.com （微信公众号：RonCoo_com）
- * 超级教程系列：《微服务架构的分布式事务解决方案》视频教程
- * 讲师：吴水成（水到渠成），840765167@qq.com
- * 课程地址：http://www.roncoo.com/course/view/7ae3d7eddc4742f78b0548aa8bd9ccdb
- * ====================================================================
- */
+
 package own.stu.distributedTransaction.pay.service.trade.utils.alipay.util;
 
 import java.io.IOException;
@@ -19,9 +12,8 @@ import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Node;
 import org.dom4j.io.SAXReader;
-
-import com.roncoo.pay.service.trade.utils.alipay.config.AlipayConfigUtil;
-import com.roncoo.pay.service.trade.utils.alipay.sign.MD5;
+import own.stu.distributedTransaction.pay.service.trade.utils.alipay.config.AlipayConfigUtil;
+import own.stu.distributedTransaction.pay.service.trade.utils.alipay.sign.MD5;
 
 
 /* *

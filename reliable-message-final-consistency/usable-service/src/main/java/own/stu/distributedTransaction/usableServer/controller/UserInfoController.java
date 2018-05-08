@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2014-2016 abel533@gmail.com
+ * Copyright (c) 2014-2019 abel533@gmail.com
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -39,7 +39,7 @@ import java.util.List;
 
 /**
  * @author liuzh
- * @since 2015-12-19 11:10
+ * @since 2018-12-19 11:10
  */
 @RestController
 @RequestMapping("/users")

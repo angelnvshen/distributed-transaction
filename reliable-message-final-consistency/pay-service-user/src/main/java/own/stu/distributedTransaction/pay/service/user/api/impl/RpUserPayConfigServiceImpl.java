@@ -1,11 +1,4 @@
-/*
- * ====================================================================
- * 龙果学院： www.roncoo.com （微信公众号：RonCoo_com）
- * 超级教程系列：《微服务架构的分布式事务解决方案》视频教程
- * 讲师：吴水成（水到渠成），840765167@qq.com
- * 课程地址：http://www.roncoo.com/course/view/7ae3d7eddc4742f78b0548aa8bd9ccdb
- * ====================================================================
- */
+
 package own.stu.distributedTransaction.pay.service.user.api.impl;
 
 import java.util.Date;
@@ -13,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import own.stu.distributedTransaction.common.core.enums.PayWayEnum;
@@ -20,16 +15,14 @@ import own.stu.distributedTransaction.common.core.enums.PublicEnum;
 import own.stu.distributedTransaction.common.core.enums.PublicStatusEnum;
 import own.stu.distributedTransaction.common.core.page.PageBean;
 import own.stu.distributedTransaction.common.core.page.PageParam;
+import own.stu.distributedTransaction.common.core.service.impl.BaseService;
 import own.stu.distributedTransaction.common.core.utils.StringUtil;
 import own.stu.distributedTransaction.pay.service.user.api.RpPayProductService;
 import own.stu.distributedTransaction.pay.service.user.api.RpPayWayService;
 import own.stu.distributedTransaction.pay.service.user.api.RpUserPayConfigService;
 import own.stu.distributedTransaction.pay.service.user.api.RpUserPayInfoService;
-import own.stu.distributedTransaction.pay.service.user.dao.RpUserPayConfigDao;
-import own.stu.distributedTransaction.pay.service.user.entity.RpPayProduct;
-import own.stu.distributedTransaction.pay.service.user.entity.RpPayWay;
-import own.stu.distributedTransaction.pay.service.user.entity.RpUserPayConfig;
-import own.stu.distributedTransaction.pay.service.user.entity.RpUserPayInfo;
+import own.stu.distributedTransaction.pay.service.user.dao.RpUserPayConfigMapper;
+import own.stu.distributedTransaction.pay.service.user.entity.*;
 import own.stu.distributedTransaction.pay.service.user.exceptions.PayBizException;
 
 
@@ -38,16 +31,16 @@ import own.stu.distributedTransaction.pay.service.user.exceptions.PayBizExceptio
  * @类修改者：
  * @修改日期：
  * @修改说明：
- * @公司名称：广州领课网络科技有限公司（龙果学院：www.roncoo.com）
+ * @公司名称：
  * @作者：zh
- * @创建时间：2016-5-18 上午11:14:10
- * @版本：V1.0
+ * @创建时间：2019-5-18 上午11:14:10
  */
-@Service("rpUserPayConfigService")
-public class RpUserPayConfigServiceImpl implements RpUserPayConfigService {
+@Service
+public class RpUserPayConfigServiceImpl extends BaseService<RpUserPayConfig> implements RpUserPayConfigService {
 
 	@Autowired
-	private RpUserPayConfigDao rpUserPayConfigDao;
+//	private RpUserPayConfigDao rpUserPayConfigDao;
+	private RpUserPayConfigMapper rpUserPayConfigDao;
 	@Autowired
 	private RpPayProductService rpPayProductService;
 	@Autowired
@@ -55,20 +48,6 @@ public class RpUserPayConfigServiceImpl implements RpUserPayConfigService {
 	@Autowired
 	private RpUserPayInfoService rpUserPayInfoService;
 	
-	@Override
-	public void saveData(RpUserPayConfig rpUserPayConfig) {
-		rpUserPayConfigDao.insert(rpUserPayConfig);
-	}
-
-	@Override
-	public void updateData(RpUserPayConfig rpUserPayConfig) {
-		rpUserPayConfigDao.update(rpUserPayConfig);
-	}
-
-	@Override
-	public RpUserPayConfig getDataById(String id) {
-		return rpUserPayConfigDao.getById(id);
-	}
 
 	@Override
 	public PageBean listPage(PageParam pageParam, RpUserPayConfig rpUserPayConfig) {
@@ -78,7 +57,13 @@ public class RpUserPayConfigServiceImpl implements RpUserPayConfigService {
 		paramMap.put("userName", rpUserPayConfig.getUserName());
 		paramMap.put("productName", rpUserPayConfig.getProductName());
 		paramMap.put("status", PublicStatusEnum.ACTIVE.name());
-		return rpUserPayConfigDao.listPage(pageParam, paramMap);
+
+		PageHelper.startPage(pageParam.getPageNum(), pageParam.getNumPerPage());
+		List<RpUserPayConfig> list = rpUserPayConfigDao.listPage(paramMap);
+		PageInfo info = new PageInfo<RpUserPayConfig>(list);
+
+		return new PageBean(pageParam.getPageNum(), pageParam.getNumPerPage(), (int)info.getTotal(), info.getList());
+		
 	}
 
 	/**
@@ -89,7 +74,7 @@ public class RpUserPayConfigServiceImpl implements RpUserPayConfigService {
 	 */
 	@Override
 	public RpUserPayConfig getByUserNo(String userNo) {
-		return rpUserPayConfigDao.getByUserNo(userNo, PublicEnum.YES.name());
+		return getByUserNo(userNo, PublicEnum.YES.name());
 	}
 	
 	/**
@@ -100,7 +85,12 @@ public class RpUserPayConfigServiceImpl implements RpUserPayConfigService {
 	 */
 	@Override
 	public RpUserPayConfig getByUserNo(String userNo, String auditStatus){
-		return rpUserPayConfigDao.getByUserNo(userNo, auditStatus);
+		Map<String , Object> paramMap = new HashMap<String , Object>();
+		paramMap.put("userNo",userNo);
+		paramMap.put("status", PublicStatusEnum.ACTIVE.name());
+		paramMap.put("auditStatus",auditStatus);
+		List<RpUserPayConfig> list = rpUserPayConfigDao.listPage(paramMap);
+		return list.get(0);
 	}
 	
 	
@@ -109,11 +99,7 @@ public class RpUserPayConfigServiceImpl implements RpUserPayConfigService {
 	 */
 	@Override
 	public List<RpUserPayConfig> listByProductCode(String productCode){
-		Map<String, Object> paramMap = new HashMap<String, Object>();
-		paramMap.put("productCode", productCode);
-		paramMap.put("status", PublicStatusEnum.ACTIVE.name());
-		paramMap.put("auditStatus", PublicEnum.YES.name());
-		return rpUserPayConfigDao.listBy(paramMap);
+		return listByProductCode(productCode, PublicEnum.YES.name());
 	}
 	
 	/**
@@ -125,7 +111,7 @@ public class RpUserPayConfigServiceImpl implements RpUserPayConfigService {
 		paramMap.put("productCode", productCode);
 		paramMap.put("status", PublicStatusEnum.ACTIVE.name());
 		paramMap.put("auditStatus", auditStatus);
-		return rpUserPayConfigDao.listBy(paramMap);
+		return rpUserPayConfigDao.listPage(paramMap);
 	}
 	
 	/**
@@ -136,7 +122,7 @@ public class RpUserPayConfigServiceImpl implements RpUserPayConfigService {
 			String fundIntoType, String isAutoSett, String appId, String merchantId, String partnerKey,
 			String ali_partner, String ali_sellerId, String ali_key)  throws PayBizException {
 		
-		RpUserPayConfig payConfig = rpUserPayConfigDao.getByUserNo(userNo, null);
+		RpUserPayConfig payConfig = this.getByUserNo(userNo, null);
 		if(payConfig != null){
 			throw new PayBizException(PayBizException.USER_PAY_CONFIG_IS_EXIST,"用户支付配置已存在");
 		}
@@ -230,7 +216,7 @@ public class RpUserPayConfigServiceImpl implements RpUserPayConfigService {
 	@Override
 	public void deleteUserPayConfig(String userNo) throws PayBizException{
 		
-		RpUserPayConfig rpUserPayConfig = rpUserPayConfigDao.getByUserNo(userNo, null);
+		RpUserPayConfig rpUserPayConfig = this.getByUserNo(userNo, null);
 		if(rpUserPayConfig == null){
 			throw new PayBizException(PayBizException.USER_PAY_CONFIG_IS_NOT_EXIST,"用户支付配置不存在");
 		}
@@ -247,7 +233,7 @@ public class RpUserPayConfigServiceImpl implements RpUserPayConfigService {
 	public void updateUserPayConfig(String userNo, String productCode, String productName, Integer riskDay, String fundIntoType,
 			String isAutoSett, String appId, String merchantId, String partnerKey,
 			String ali_partner, String ali_sellerId, String ali_key)  throws PayBizException{
-		RpUserPayConfig rpUserPayConfig = rpUserPayConfigDao.getByUserNo(userNo, null);
+		RpUserPayConfig rpUserPayConfig = this.getByUserNo(userNo, null);
 		if(rpUserPayConfig == null){
 			throw new PayBizException(PayBizException.USER_PAY_CONFIG_IS_NOT_EXIST,"用户支付配置不存在");
 		}
@@ -360,6 +346,7 @@ public class RpUserPayConfigServiceImpl implements RpUserPayConfigService {
 	    paramMap.put("payKey", payKey);
 	    paramMap.put("status", PublicStatusEnum.ACTIVE.name());
 	    paramMap.put("auditStatus", PublicEnum.YES.name());
-	    return rpUserPayConfigDao.getBy(paramMap);
+		List<RpUserPayConfig> list = rpUserPayConfigDao.listPage(paramMap);
+		return list.get(0);
 	}
 }

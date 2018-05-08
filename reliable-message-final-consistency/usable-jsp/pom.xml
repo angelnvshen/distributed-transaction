@@ -20,15 +20,15 @@
             <scope>test</scope>
         </dependency>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-activemq</artifactId>
-        </dependency>
-
         <!--WEB支持-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-activemq</artifactId>
         </dependency>
 
         <!--jsp页面使用jstl标签-->
@@ -43,6 +43,19 @@
             <artifactId>tomcat-embed-jasper</artifactId>
             <scope>provided</scope>
         </dependency>
+
+        <dependency>
+            <groupId>own.stu.distributed-transaction</groupId>
+            <artifactId>pay-service-message</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>own.stu.distributed-transaction</groupId>
+            <artifactId>common-core</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+
     </dependencies>
 
     <build>

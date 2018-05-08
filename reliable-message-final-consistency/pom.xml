@@ -11,15 +11,14 @@
 		<module>pay-service-message</module>
 		<module>usable-service</module>
 		<module>eureka-server</module>
-        <module>pay-web-message</module>
         <module>usable-jsp</module>
 		<module>pay-app-message</module>
 		<module>pay-service-trade</module>
-		<module>pay-service-accounting</module>
 		<module>pay-app-queue</module>
         <module>pay-web-boss</module>
 		<module>pay-service-user</module>
-    </modules>
+		<module>pay-web-message-se</module>
+	</modules>
 	<packaging>pom</packaging>
 
 	<name>reliable-message-final-consistency</name>

@@ -70,8 +70,7 @@
 
   <select id="getByUserNo" resultMap="BaseResultMap"
           parameterType="java.util.Map">
-    select
-    <include refid="Base_Column_List" />
+    select *
     from
     <include refid="table_name" />
     <where>

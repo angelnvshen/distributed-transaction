@@ -1,11 +1,4 @@
-/*
- * ====================================================================
- * 龙果学院： www.roncoo.com （微信公众号：RonCoo_com）
- * 超级教程系列 ：《微服务架构的分布式事务解决方案》视频教程
- * 讲师：吴水成（水到渠成），840765167@qq.com
- * 课程地址：www.roncoo.com/details/7ae3d7eddc4742f78b0548aa8bd9ccdb
- * ====================================================================
- */
+
 package own.stu.distributedTransaction.common.core.dao;
 
 import org.apache.ibatis.session.SqlSession;
@@ -17,17 +10,12 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @类功能说明： 数据访问层基础支撑接口.
- * @类修改者：
- * @修改日期：
- * @修改说明：
- * @公司名称：广州领课网络科技有限公司（龙果学院）.
- * @版本：V1.0
+ * @类功能说明： 数据访问层基础支撑接口..
  */
 public interface BaseDao<T> {
 
     /**
-     * 函数功能说明 ：单条插入数据. 修改者名字：Along 修改日期： 2016-5-11 修改内容：
+     * 函数功能说明 ：单条插入数据. 修改者名字：Along 修改日期： 2019-5-11 修改内容：
      * 
      * @参数：@param entity
      * @参数：@return
@@ -37,7 +25,7 @@ public interface BaseDao<T> {
     int insert(T entity);
 
     /**
-     * 函数功能说明 ： 批量插入数据. 修改者名字：Along 修改日期： 2016-5-11 修改内容：
+     * 函数功能说明 ： 批量插入数据. 修改者名字：Along 修改日期： 2019-5-11 修改内容：
      * 
      * @参数：@param list
      * @参数：@return
@@ -47,7 +35,7 @@ public interface BaseDao<T> {
     int insert(List<T> list);
 
     /**
-     * 函数功能说明 ：根据id单条更新数据. 修改者名字： Along 修改日期： 2016-5-11 修改内容：
+     * 函数功能说明 ：根据id单条更新数据. 修改者名字： Along 修改日期： 2019-5-11 修改内容：
      * 
      * @参数：@param entity
      * @参数：@return
@@ -57,7 +45,7 @@ public interface BaseDao<T> {
     int update(T entity);
 
     /**
-     * 函数功能说明 ： 根据id批量更新数据. 修改者名字：Along 修改日期： 2016-5-11 修改内容：
+     * 函数功能说明 ： 根据id批量更新数据. 修改者名字：Along 修改日期： 2019-5-11 修改内容：
      * 
      * @参数：@param list
      * @参数：@return
@@ -67,7 +55,7 @@ public interface BaseDao<T> {
     int update(List<T> list);
 
     /**
-     * 函数功能说明 ： 根据column批量更新数据. 修改者名字： Along 修改日期： 2016-5-11 修改内容：
+     * 函数功能说明 ： 根据column批量更新数据. 修改者名字： Along 修改日期： 2019-5-11 修改内容：
      * 
      * @参数：@param paramMap
      * @参数：@return
@@ -77,7 +65,7 @@ public interface BaseDao<T> {
     int update(Map<String, Object> paramMap);
 
     /**
-     * 函数功能说明 ： 根据id查询数据. 修改者名字： Along 修改日期： 2016-5-11 修改内容：
+     * 函数功能说明 ： 根据id查询数据. 修改者名字： Along 修改日期： 2019-5-11 修改内容：
      * 
      * @参数：@param id
      * @参数：@return
@@ -87,7 +75,7 @@ public interface BaseDao<T> {
     T getById(String id);
 
     /**
-     * 函数功能说明 ： 根据column查询数据. 修改者名字： Along 修改日期： 2016-5-11 修改内容：
+     * 函数功能说明 ： 根据column查询数据. 修改者名字： Along 修改日期： 2019-5-11 修改内容：
      * 
      * @参数：@param paramMap
      * @参数：@return
@@ -110,7 +98,7 @@ public interface BaseDao<T> {
     public List<T> listBy(Map<String, Object> paramMap);
 
     /**
-     * 函数功能说明 ： 根据column查询列表数据. 修改者名字： Along 修改日期： 2016-5-11 修改内容：
+     * 函数功能说明 ： 根据column查询列表数据. 修改者名字： Along 修改日期： 2019-5-11 修改内容：
      * 
      * @参数：@param paramMap
      * @参数：@return
@@ -120,7 +108,7 @@ public interface BaseDao<T> {
     public List<T> listByColumn(Map<String, Object> paramMap);
 
     /**
-     * 函数功能说明 ： 根据column查询记录数. 修改者名字： Along 修改日期： 2016-1-9 修改内容：
+     * 函数功能说明 ： 根据column查询记录数. 修改者名字： Along 修改日期： 2019-1-9 修改内容：
      * 
      * @参数：@param paramMap
      * @参数：@return
@@ -130,7 +118,7 @@ public interface BaseDao<T> {
     Long getCountByColumn(Map<String, Object> paramMap);
 
     /**
-     * 函数功能说明 ： 根据id删除数据. 修改者名字： Along 修改日期： 2016-5-11 修改内容：
+     * 函数功能说明 ： 根据id删除数据. 修改者名字： Along 修改日期： 2019-5-11 修改内容：
      * 
      * @参数：@param id
      * @参数：@return
@@ -140,7 +128,7 @@ public interface BaseDao<T> {
     int delete(String id);
 
     /**
-     * 函数功能说明 ： 根据id批量删除数据. 修改者名字： Along 修改日期： 2016-5-11 修改内容：
+     * 函数功能说明 ： 根据id批量删除数据. 修改者名字： Along 修改日期： 2019-5-11 修改内容：
      * 
      * @参数：@param list
      * @参数：@return
@@ -150,7 +138,7 @@ public interface BaseDao<T> {
     int delete(List<T> list);
 
     /**
-     * 函数功能说明 ： 根据column批量删除数据. 修改者名字：Along 修改日期： 2016-5-11 修改内容：
+     * 函数功能说明 ： 根据column批量删除数据. 修改者名字：Along 修改日期： 2019-5-11 修改内容：
      * 
      * @参数：@param paramMap
      * @参数：@return
@@ -160,7 +148,7 @@ public interface BaseDao<T> {
     int delete(Map<String, Object> paramMap);
 
     /**
-     * 函数功能说明 ： 分页查询数据 . 修改者名字： Along 修改日期： 2016-5-11 修改内容：
+     * 函数功能说明 ： 分页查询数据 . 修改者名字： Along 修改日期： 2019-5-11 修改内容：
      * 
      * @参数：@param pageParam
      * @参数：@param paramMap

@@ -1,12 +1,26 @@
-/*
- * ====================================================================
- * 龙果学院： www.roncoo.com （微信公众号：RonCoo_com）
- * 超级教程系列：《微服务架构的分布式事务解决方案》视频教程
- * 讲师：吴水成（水到渠成），840765167@qq.com
- * 课程地址：http://www.roncoo.com/course/view/7ae3d7eddc4742f78b0548aa8bd9ccdb
- * ====================================================================
- */
+
 package own.stu.distributedTransaction.pay.service.user.api.impl;
+
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import org.apache.commons.lang.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import own.stu.distributedTransaction.common.core.enums.PublicStatusEnum;
+import own.stu.distributedTransaction.common.core.exception.BizException;
+import own.stu.distributedTransaction.common.core.page.PageBean;
+import own.stu.distributedTransaction.common.core.page.PageParam;
+import own.stu.distributedTransaction.common.core.service.impl.BaseService;
+import own.stu.distributedTransaction.common.core.utils.DateUtils;
+import own.stu.distributedTransaction.common.core.utils.StringUtil;
+import own.stu.distributedTransaction.pay.service.user.api.RpAccountService;
+import own.stu.distributedTransaction.pay.service.user.api.RpUserInfoService;
+import own.stu.distributedTransaction.pay.service.user.dao.RpUserInfoMapper;
+import own.stu.distributedTransaction.pay.service.user.entity.RpAccount;
+import own.stu.distributedTransaction.pay.service.user.entity.RpUserInfo;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -14,72 +28,105 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import own.stu.distributedTransaction.common.core.enums.PublicStatusEnum;
-import own.stu.distributedTransaction.common.core.page.PageBean;
-import own.stu.distributedTransaction.common.core.page.PageParam;
-import own.stu.distributedTransaction.common.core.utils.StringUtil;
-import own.stu.distributedTransaction.pay.service.user.api.RpAccountService;
-import own.stu.distributedTransaction.pay.service.user.api.RpUserInfoService;
-import own.stu.distributedTransaction.pay.service.user.dao.RpUserInfoDao;
-import own.stu.distributedTransaction.pay.service.user.entity.RpAccount_bak;
-import own.stu.distributedTransaction.pay.service.user.entity.RpUserInfo;
-
 /**
  * @类功能说明： 用户信息service实现类
  * @类修改者：
  * @修改日期：
  * @修改说明：
- * @公司名称：广州领课网络科技有限公司（龙果学院：www.roncoo.com）
+ * @公司名称：
  * @作者：zh
- * @创建时间：2016-5-18 上午11:14:10
- * @版本：V1.0
+ * @创建时间：2019-5-18 上午11:14:10
  */
-@Service("rpUserInfoService")
-public class RpUserInfoServiceImpl implements RpUserInfoService{
+@Service
+public class RpUserInfoServiceImpl extends BaseService<RpUserInfo> implements RpUserInfoService {
 
-	@Autowired
-	private RpUserInfoDao rpUserInfoDao;
-	
-	@Autowired
-	private RpAccountService rpAccountService;
-	
-	@Override
-	public void saveData(RpUserInfo rpUserInfo) {
-		rpUserInfoDao.insert(rpUserInfo);
-	}
+    protected static final Log LOG = LogFactory.getLog(RpUserInfoServiceImpl.class);
 
-	@Override
-	public void updateData(RpUserInfo rpUserInfo) {
-		rpUserInfoDao.update(rpUserInfo);
-	}
+    /**
+     * 用户编号前缀
+     **/
+    private static final String USER_NO_PREFIX = "8888";
 
-	@Override
-	public RpUserInfo getDataById(String id) {
-		return rpUserInfoDao.getById(id);
-	}
+    /**
+     * 账户编号前缀
+     **/
+    private static final String ACCOUNT_NO_PREFIX = "9999";
 
-	@Override
-	public PageBean listPage(PageParam pageParam, RpUserInfo rpUserInfo) {
-		Map<String, Object> paramMap = new HashMap<String, Object>();
-		return rpUserInfoDao.listPage(pageParam, paramMap);
-	}
-	
+    @Autowired
+//	private RpUserInfoDao rpUserInfoDao;
+    private RpUserInfoMapper rpUserInfoDao;
+
+    @Autowired
+    private RpAccountService rpAccountService;
+
+    @Override
+    public PageBean listPage(PageParam pageParam, RpUserInfo rpUserInfo) {
+        Map<String, Object> paramMap = new HashMap<String, Object>();
+
+        PageHelper.startPage(pageParam.getPageNum(), pageParam.getNumPerPage());
+        List<RpUserInfo> list = rpUserInfoDao.listPage(paramMap);
+        PageInfo info = new PageInfo<RpUserInfo>(list);
+
+        return new PageBean(pageParam.getPageNum(), pageParam.getNumPerPage(), (int) info.getTotal(), info.getList());
+    }
+
+    private String buildUserNo() {
+        // 获取用户编号序列
+        String userNoSeq = null;
+        String userNo = null;
+
+        try {
+            // 获取用户编号序列
+            userNoSeq = rpUserInfoDao.buildUserNoSeq();
+            // 20位的用户编号规范：'8888' + yyyyMMdd(时间) + 序列的后8位
+            String dateString = DateUtils.toString(new Date(), "yyyyMMdd");
+            userNo = USER_NO_PREFIX + dateString + userNoSeq.substring(userNoSeq.length() - 8, userNoSeq.length());
+        } catch (Exception e) {
+            LOG.error("生成用户编号异常：", e);
+            throw BizException.DB_GET_SEQ_NEXT_VALUE_ERROR;
+        }
+        if (StringUtils.isEmpty(userNo)) {
+            throw BizException.DB_GET_SEQ_NEXT_VALUE_ERROR;
+        }
+
+        return userNo;
+    }
+
+    private String buildAccountNo() {
+        // 获取账户编号序列值，用于生成20位的账户编号
+        String accountNoSeq = null;
+        // 20位的账户编号规范：'9999' + yyyyMMdd(时间) + 序列的后8位
+        String accountNo = null;
+
+        try {
+            // 获取账户编号序列值，用于生成20位的账户编号
+            accountNoSeq = rpUserInfoDao.buildAccountNoSeq();
+            // 20位的账户编号规范：'9999' + yyyyMMdd(时间) + 序列的后8位
+            String dateString = DateUtils.toString(new Date(), "yyyyMMdd");
+            accountNo = ACCOUNT_NO_PREFIX + dateString + accountNoSeq.substring(accountNoSeq.length() - 8, accountNoSeq.length());
+
+        } catch (Exception e) {
+            LOG.error("生成账户编号异常：", e);
+            throw BizException.DB_GET_SEQ_NEXT_VALUE_ERROR;
+        }
+        if (StringUtils.isEmpty(accountNo)) {
+            throw BizException.DB_GET_SEQ_NEXT_VALUE_ERROR;
+        }
+
+        return accountNo;
+    }
+
     /**
      * 用户线下注册
-     * 
-     * @param userName
-     *            用户名
+     *
+     * @param userName 用户名
      * @return
      */
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void registerOffline(String userName) {
-        String userNo = rpUserInfoDao.buildUserNo();
-        String accountNo = rpUserInfoDao.buildAccountNo();
+        String userNo = this.buildUserNo();
+        String accountNo = this.buildAccountNo();
 
         //生成用户信息
         RpUserInfo rpUserInfo = new RpUserInfo();
@@ -89,11 +136,11 @@ public class RpUserInfoServiceImpl implements RpUserInfoService{
         rpUserInfo.setStatus(PublicStatusEnum.ACTIVE.name());
         rpUserInfo.setUserName(userName);
         rpUserInfo.setUserNo(userNo);
-        rpUserInfo.setVersion(0);
+        //rpUserInfo.setVersion(0);
         this.saveData(rpUserInfo);
 
         // 生成账户信息
-        RpAccount_bak rpAccount = new RpAccount_bak();
+        RpAccount rpAccount = new RpAccount();
         rpAccount.setAccountNo(accountNo);
         rpAccount.setAccountType("0");
         rpAccount.setCreateTime(new Date());
@@ -121,19 +168,21 @@ public class RpUserInfoServiceImpl implements RpUserInfoService{
     @Override
     public RpUserInfo getDataByMerchentNo(String merchantNo) {
         Map<String, Object> paramMap = new HashMap<String, Object>();
-		paramMap.put("userNo", merchantNo);
-		paramMap.put("status", PublicStatusEnum.ACTIVE.name());
-		return rpUserInfoDao.getBy(paramMap);
+        paramMap.put("userNo", merchantNo);
+        paramMap.put("status", PublicStatusEnum.ACTIVE.name());
+        List<RpUserInfo> list = rpUserInfoDao.listPage(paramMap);
+        return list.get(0);
     }
-    
+
     /**
-	 * 获取所有用户
-	 * @return
-	 */
+     * 获取所有用户
+     *
+     * @return
+     */
     @Override
-    public List<RpUserInfo> listAll(){
-    	Map<String, Object> paramMap = new HashMap<String, Object>();
-		paramMap.put("status", PublicStatusEnum.ACTIVE.name());
-		return rpUserInfoDao.listBy(paramMap);
-	}
+    public List<RpUserInfo> listAll() {
+        Map<String, Object> paramMap = new HashMap<String, Object>();
+        paramMap.put("status", PublicStatusEnum.ACTIVE.name());
+        return rpUserInfoDao.listPage(paramMap);
+    }
 }

@@ -12,15 +12,10 @@
     <artifactId>pay-service-user</artifactId>
 
     <dependencies>
-        <dependency>
-            <groupId>own.stu.distributed-transaction</groupId>
-            <artifactId>common-core</artifactId>
-            <version>${project.parent.version}</version>
-        </dependency>
 
         <dependency>
             <groupId>own.stu.distributed-transaction</groupId>
-            <artifactId>pay-service-accounting</artifactId>
+            <artifactId>common-core</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
 

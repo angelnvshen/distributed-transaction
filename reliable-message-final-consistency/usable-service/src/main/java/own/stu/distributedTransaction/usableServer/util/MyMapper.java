@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2014-2016 abel533@gmail.com
+ * Copyright (c) 2014-2019 abel533@gmail.com
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -31,7 +31,7 @@ import tk.mybatis.mapper.common.MySqlMapper;
  * 继承自己的MyMapper
  *
  * @author liuzh
- * @since 2015-09-06 21:53
+ * @since 2018-09-06 21:53
  */
 public interface MyMapper<T> extends Mapper<T>, MySqlMapper<T> {
     //TODO

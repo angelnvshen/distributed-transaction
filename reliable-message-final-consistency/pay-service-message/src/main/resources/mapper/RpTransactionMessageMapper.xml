@@ -42,13 +42,6 @@
     <![CDATA[ order by create_time ]]>
     <if test="listPageSortType == 'ASC'"> asc </if>
     <if test="listPageSortType != 'ASC'"> desc </if>
-    <![CDATA[ limit #{pageFirst}, #{pageSize}]]>
   </select>
 
-  <select id="listPageCount" parameterType="java.util.Map" resultType="long">
-    select count(1) from <include refid="table_name" />
-    <where>
-      <include refid="condition_sql" />
-    </where>
-  </select>
 </mapper>
