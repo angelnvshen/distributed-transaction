@@ -18,7 +18,8 @@
         <module>pay-web-boss</module>
 		<module>pay-service-user</module>
 		<module>pay-web-message-se</module>
-	</modules>
+        <module>pay-web-shop</module>
+    </modules>
 	<packaging>pom</packaging>
 
 	<name>reliable-message-final-consistency</name>
