@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import own.stu.distributedTransaction.common.core.dwz.DWZ;
 import own.stu.distributedTransaction.common.core.dwz.DwzAjax;
 import own.stu.distributedTransaction.common.core.utils.StringUtil;
@@ -115,5 +116,11 @@ public class LoginController {
 			return "admin.common.ajaxDone";
 		}
 		return "admin.login";
+	}
+
+	@RequestMapping("test")
+	@ResponseBody
+	public String test(){
+		return "success";
 	}
 }
