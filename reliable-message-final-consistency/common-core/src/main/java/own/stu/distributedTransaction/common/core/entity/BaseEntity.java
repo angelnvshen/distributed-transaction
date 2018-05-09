@@ -12,11 +12,8 @@ import java.util.Date;
  */
 public class BaseEntity implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	private String id = StringUtil.get32UUID();// 主键ID.
 	private Integer version = 0;// 版本号默认为0
 	private String status;// 状态 PublicStatusEnum

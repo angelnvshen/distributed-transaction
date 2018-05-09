@@ -1,7 +1,9 @@
 package own.stu.distributedTransaction.pay.service.message.entity;
 
-import java.util.Date;
+import own.stu.distributedTransaction.common.core.utils.StringUtil;
+
 import javax.persistence.*;
+import java.util.Date;
 
 @Table(name = "rp_transaction_message")
 public class RpTransactionMessage {
@@ -10,12 +12,12 @@ public class RpTransactionMessage {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private String id = StringUtil.get32UUID();// 主键ID.
 
     /**
      * 版本号
      */
-    private Integer version;
+    private Integer version = 0;// 版本号默认为0
 
     /**
      * 修改者
@@ -37,7 +39,7 @@ public class RpTransactionMessage {
      * 创建时间
      */
     @Column(name = "create_time")
-    private Date createTime;
+    private Date createTime = new Date();
 
     /**
      * 消息ID
