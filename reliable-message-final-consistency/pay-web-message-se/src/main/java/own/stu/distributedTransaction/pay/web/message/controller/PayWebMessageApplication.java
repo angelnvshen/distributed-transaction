@@ -3,6 +3,8 @@ package own.stu.distributedTransaction.pay.web.message.controller;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.jms.core.JmsTemplate;
@@ -15,6 +17,7 @@ import tk.mybatis.spring.annotation.MapperScan;
  * Created by CHANEL on 2018/5/6.
  */
 @Controller
+@EnableDiscoveryClient
 @SpringBootApplication
 @ServletComponentScan
 @ComponentScan(basePackages = "own.stu.distributedTransaction.pay")

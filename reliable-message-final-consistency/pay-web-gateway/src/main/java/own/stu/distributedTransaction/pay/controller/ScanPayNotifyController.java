@@ -33,15 +33,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.alibaba.fastjson.JSONObject;
-import com.roncoo.pay.common.core.enums.NotifyDestinationNameEnum;
-import com.roncoo.pay.common.core.enums.PayWayEnum;
-import com.roncoo.pay.common.core.utils.StringUtil;
-import com.roncoo.pay.service.message.api.RpTransactionMessageService;
-import com.roncoo.pay.service.message.entity.RpTransactionMessage;
-import com.roncoo.pay.service.trade.api.RpTradePaymentManagerService;
-import com.roncoo.pay.service.trade.utils.WeiXinPayUtils;
-import com.roncoo.pay.service.trade.utils.alipay.util.AliPayUtil;
-import com.roncoo.pay.service.trade.vo.OrderPayResultVo;
+import own.stu.distributedTransaction.common.core.enums.NotifyDestinationNameEnum;
+import own.stu.distributedTransaction.common.core.enums.PayWayEnum;
+import own.stu.distributedTransaction.common.core.utils.StringUtil;
+import own.stu.distributedTransaction.pay.service.message.api.RpTransactionMessageService;
+import own.stu.distributedTransaction.pay.service.message.entity.RpTransactionMessage;
+import own.stu.distributedTransaction.pay.service.trade.api.RpTradePaymentManagerService;
+import own.stu.distributedTransaction.pay.service.trade.utils.WeiXinPayUtils;
+import own.stu.distributedTransaction.pay.service.trade.utils.alipay.util.AliPayUtil;
+import own.stu.distributedTransaction.pay.service.trade.vo.OrderPayResultVo;
 
 @Controller
 @RequestMapping(value = "/scanPayNotify")
