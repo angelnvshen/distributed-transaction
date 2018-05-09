@@ -20,7 +20,6 @@
 		<module>pay-web-message</module>
         <module>pay-web-shop</module>
         <module>pay-web-gateway</module>
-		<module>embedded-tomcat-s</module>
 	</modules>
 	<packaging>pom</packaging>
 
@@ -207,6 +206,12 @@
 					<artifactId>spring-boot-maven-plugin</artifactId>
 				</plugin>
 
+				<!-- 没有web.xml文件的情况下构建WAR -->
+				<plugin>
+					<artifactId>maven-war-plugin</artifactId>
+					<version>3.0.0</version>
+				</plugin>
+
 				<plugin>
 					<groupId>org.mybatis.generator</groupId>
 					<artifactId>mybatis-generator-maven-plugin</artifactId>
@@ -231,6 +236,13 @@
 				</plugin>
 			</plugins>
 		</pluginManagement>
+
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
 
 	</build>
 </project>
