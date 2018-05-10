@@ -4,8 +4,8 @@ package own.stu.distributedTransaction.pay.app.queue.bankmessage.biz;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import own.stu.distributedTransaction.pay.service.message.api.RpTransactionMessageService;
-import own.stu.distributedTransaction.pay.service.trade.api.RpTradePaymentManagerService;
+import own.stu.distributedTransaction.pay.service.message.service.RpTransactionMessageService;
+import own.stu.distributedTransaction.pay.service.trade.service.RpTradePaymentManagerService;
 
 import java.util.Map;
 

@@ -15,25 +15,24 @@
 
         <dependency>
             <groupId>own.stu.distributed-transaction</groupId>
-            <artifactId>common-core</artifactId>
+            <artifactId>pay-service-api</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
 
         <dependency>
-            <groupId>own.stu.distributed-transaction</groupId>
-            <artifactId>pay-service-message</artifactId>
-            <version>${project.parent.version}</version>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-eureka</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>own.stu.distributed-transaction</groupId>
-            <artifactId>pay-service-trade</artifactId>
-            <version>${project.parent.version}</version>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-feign</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>runtime</scope>
         </dependency>
     </dependencies>
 

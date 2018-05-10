@@ -13,7 +13,7 @@ import org.springframework.jms.listener.SessionAwareMessageListener;
 
 import com.alibaba.fastjson.JSONObject;
 import own.stu.distributedTransaction.common.core.exception.BizException;
-import own.stu.distributedTransaction.pay.service.message.api.RpTransactionMessageService;
+import own.stu.distributedTransaction.pay.service.message.service.RpTransactionMessageService;
 import own.stu.distributedTransaction.pay.service.user.api.RpAccountingVoucherService;
 import own.stu.distributedTransaction.pay.service.user.entity.RpAccountingVoucher;
 

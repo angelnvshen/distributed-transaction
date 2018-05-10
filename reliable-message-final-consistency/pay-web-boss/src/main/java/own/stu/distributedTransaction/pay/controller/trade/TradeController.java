@@ -13,7 +13,7 @@ import own.stu.distributedTransaction.common.core.enums.PayWayEnum;
 import own.stu.distributedTransaction.common.core.enums.TrxTypeEnum;
 import own.stu.distributedTransaction.common.core.page.PageBean;
 import own.stu.distributedTransaction.common.core.page.PageParam;
-import own.stu.distributedTransaction.pay.service.trade.api.RpTradePaymentQueryService;
+import own.stu.distributedTransaction.pay.service.trade.service.RpTradePaymentQueryService;
 import own.stu.distributedTransaction.pay.service.trade.enums.TradeStatusEnum;
 import own.stu.distributedTransaction.pay.service.trade.vo.PaymentOrderQueryVo;
 import own.stu.distributedTransaction.pay.service.user.enums.FundInfoTypeEnum;

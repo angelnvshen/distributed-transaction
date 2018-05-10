@@ -61,7 +61,7 @@
 
         <!--<dependency>
             <groupId>javax</groupId>
-            <artifactId>javaee-api</artifactId>
+            <artifactId>javaee-service</artifactId>
         </dependency>
 
         <dependency>

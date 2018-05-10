@@ -25,7 +25,7 @@ import java.net.URL;
 @EnableDiscoveryClient
 @SpringBootApplication
 @ServletComponentScan
-@ComponentScan(basePackages = "own.stu.distributedTransaction.pay")
+@ComponentScan(basePackages = {"own.stu.distributedTransaction.pay", "own.stu.distributedTransaction.common.core.config"})
 @MapperScan(basePackages = "own.stu.distributedTransaction.pay.service.*.dao")
 public class PayWebMessageApplication extends SpringBootServletInitializer {
 
@@ -43,15 +43,4 @@ public class PayWebMessageApplication extends SpringBootServletInitializer {
         return "redirect:login";
     }
 
-    /* 仅仅 内置tomcat使用*/
-    @Bean
-    public EmbeddedServletContainerFactory embeddedServletContainerFactory() {
-        ConfigurableEmbeddedServletContainer factory = new TomcatEmbeddedServletContainerFactory();
-
-        URL xmlPath = this.getClass().getClassLoader().getResource("");
-        String customer_jsp_path = xmlPath.getFile().replaceAll("target/classes", "src/main/webapp");
-
-        factory.setDocumentRoot(new File(customer_jsp_path));
-        return (EmbeddedServletContainerFactory) factory;
-    }
 }

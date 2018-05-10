@@ -4184,7 +4184,7 @@ jQuery.event = {
 			// If event changes its type, use the special event handlers for the changed type
 			special = jQuery.event.special[ type ] || {};
 
-			// If selector defined, determine special event api type, otherwise given type
+			// If selector defined, determine special event service type, otherwise given type
 			type = ( selector ? special.delegateType : special.bindType ) || type;
 
 			// Update special based on newly reset type
@@ -45406,8 +45406,8 @@ module.exports = warning;
 	}
 	
 	//
-	// function wx( api, param, cb ){
-	//     var url = apiPath.weixin[api];
+	// function wx( service, param, cb ){
+	//     var url = apiPath.weixin[service];
 	//     if( !param )
 	//         param = {test: "123"}
 	//     if(url){

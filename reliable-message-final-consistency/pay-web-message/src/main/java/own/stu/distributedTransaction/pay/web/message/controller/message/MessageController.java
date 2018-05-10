@@ -18,7 +18,7 @@ import own.stu.distributedTransaction.common.core.enums.NotifyDestinationNameEnu
 import own.stu.distributedTransaction.common.core.page.PageBean;
 import own.stu.distributedTransaction.common.core.page.PageParam;
 import own.stu.distributedTransaction.common.core.utils.StringUtil;
-import own.stu.distributedTransaction.pay.service.message.api.RpTransactionMessageService;
+import own.stu.distributedTransaction.pay.service.message.service.RpTransactionMessageService;
 import own.stu.distributedTransaction.pay.service.message.entity.RpTransactionMessage;
 import own.stu.distributedTransaction.pay.service.message.enums.MessageStatusEnum;
 
