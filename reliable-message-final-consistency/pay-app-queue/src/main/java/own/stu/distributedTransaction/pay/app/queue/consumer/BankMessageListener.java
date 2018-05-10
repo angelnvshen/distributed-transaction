@@ -1,13 +1,15 @@
 
-package own.stu.distributedTransaction.pay.app.queue;
+package own.stu.distributedTransaction.pay.app.queue.consumer;
 
 import com.alibaba.fastjson.JSONObject;
 import org.apache.activemq.command.ActiveMQTextMessage;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jms.annotation.JmsListener;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.listener.SessionAwareMessageListener;
+import org.springframework.stereotype.Service;
 import own.stu.distributedTransaction.common.core.exception.BizException;
 import own.stu.distributedTransaction.pay.app.queue.bankmessage.BankMessageFixedThreadPool;
 import own.stu.distributedTransaction.pay.app.queue.bankmessage.BankMessageTask;
@@ -17,12 +19,10 @@ import javax.jms.Message;
 import javax.jms.Session;
 import java.util.Map;
 
-public class BankMessageListener implements SessionAwareMessageListener<Message> {
+@Service
+public class BankMessageListener{
 
 	private static final Log LOG = LogFactory.getLog(BankMessageListener.class);
-
-	@Autowired
-	private JmsTemplate notifyJmsTemplate;
 
 	@Autowired
 	private BankMessageBiz bankMessageBiz;
@@ -33,8 +33,8 @@ public class BankMessageListener implements SessionAwareMessageListener<Message>
 //	@Autowired
 //	private RpTransactionMessageService rpTransactionMessageService;
 
-
-	public synchronized void onMessage(Message message, Session session) {
+	@JmsListener(destination = "BANK_NOTIFY")
+	public synchronized void onMessage(Message message) {
 
 		Map<String,String> param = null;
 		String strMessage = null;
@@ -59,20 +59,4 @@ public class BankMessageListener implements SessionAwareMessageListener<Message>
 		}
 	}
 
-	public JmsTemplate getNotifyJmsTemplate() {
-		return notifyJmsTemplate;
-	}
-
-
-	public void setNotifyJmsTemplate(JmsTemplate notifyJmsTemplate) {
-		this.notifyJmsTemplate = notifyJmsTemplate;
-	}
-
-	public BankMessageBiz getBankMessageBiz() {
-		return bankMessageBiz;
-	}
-
-	public void setBankMessageBiz(BankMessageBiz bankMessageBiz) {
-		this.bankMessageBiz = bankMessageBiz;
-	}
 }

@@ -4,17 +4,16 @@ package own.stu.distributedTransaction.pay.app.queue.bankmessage.biz;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import own.stu.distributedTransaction.pay.service.message.service.RpTransactionMessageService;
 import own.stu.distributedTransaction.pay.service.trade.service.RpTradePaymentManagerService;
 
 import java.util.Map;
 
 /**
- * <b>功能说明:
- * </b>
- *
-
+ * <b>功能说明: </b>
  */
+@Service
 public class BankMessageBiz {
 
     private static final Log LOG = LogFactory.getLog(BankMessageBiz.class);
@@ -25,19 +24,19 @@ public class BankMessageBiz {
     @Autowired
     private RpTransactionMessageService rpTransactionMessageService;
 
-    public void completePay(Map<String , String > notifyMessageMap){
+    public void completePay(Map<String, String> notifyMessageMap) {
 
         String messageId = notifyMessageMap.get("messageId");
         String payWayCode = notifyMessageMap.get("payWayCode");
         //调用业务方法,完成交易
-        try{
+        try {
 
             rpTradePaymentManagerService.completeScanPay(payWayCode, notifyMessageMap);
 
             //删除消息
             rpTransactionMessageService.deleteMessageByMessageId(messageId);
-        }catch (Exception e){
-            LOG.error("完成支付结果异常:",e);
+        } catch (Exception e) {
+            LOG.error("完成支付结果异常:", e);
         }
 
     }

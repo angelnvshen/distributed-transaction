@@ -7,6 +7,7 @@ import own.stu.distributedTransaction.pay.service.trade.service.RpTradePaymentQu
 import own.stu.distributedTransaction.pay.service.trade.entity.RpTradePaymentRecord;
 
 @RestController("trade")
+@RequestMapping("trade")
 public class PayTradeAPIController {
 
     @Autowired

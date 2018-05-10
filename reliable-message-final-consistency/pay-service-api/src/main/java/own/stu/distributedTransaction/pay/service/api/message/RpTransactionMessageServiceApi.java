@@ -12,33 +12,33 @@ import java.util.Map;
 @FeignClient(name = "pay-web-message-api")
 public interface RpTransactionMessageServiceApi {
 
-    @RequestMapping("saveMessageWaitingConfirm")
+    @RequestMapping("message/saveMessageWaitingConfirm")
     String saveMessageWaitingConfirm(@RequestBody RpTransactionMessage rpTransactionMessage);
 
-    @RequestMapping("confirmAndSendMessage")
+    @RequestMapping("message/confirmAndSendMessage")
     String confirmAndSendMessage(String messageId);
 
-    @RequestMapping("saveAndSendMessage")
+    @RequestMapping("message/saveAndSendMessage")
     String saveAndSendMessage(@RequestBody RpTransactionMessage rpTransactionMessage);
 
-    @RequestMapping("directSendMessage")
+    @RequestMapping("message/directSendMessage")
     String directSendMessage(@RequestBody RpTransactionMessage rpTransactionMessage);
 
-    @RequestMapping("reSendMessage")
+    @RequestMapping("message/reSendMessage")
     String reSendMessage(@RequestBody RpTransactionMessage rpTransactionMessage);
 
-    @RequestMapping("reSendMessageByMessageId")
+    @RequestMapping("message/reSendMessageByMessageId")
     String reSendMessageByMessageId(String messageId);
 
-    @RequestMapping("setMessageToAreadlyDead")
+    @RequestMapping("message/setMessageToAreadlyDead")
     String setMessageToAreadlyDead(String messageId);
 
-    @RequestMapping("getMessageByMessageId")
+    @RequestMapping("message/getMessageByMessageId")
     RpTransactionMessage getMessageByMessageId(String messageId);
 
-    @RequestMapping("deleteMessageByMessageId")
+    @RequestMapping("message/deleteMessageByMessageId")
     String deleteMessageByMessageId(String messageId);
 
-    @RequestMapping("listPage")
+    @RequestMapping("message/listPage")
     PageBean listPage(@RequestBody Map<String, Object> paramMap);
 }

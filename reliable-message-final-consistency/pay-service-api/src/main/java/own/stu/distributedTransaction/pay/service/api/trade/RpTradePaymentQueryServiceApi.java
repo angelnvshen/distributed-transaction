@@ -8,6 +8,6 @@ import own.stu.distributedTransaction.pay.service.api.entity.RpTradePaymentRecor
 @FeignClient(name = "pay-web-trade-api")
 public interface RpTradePaymentQueryServiceApi {
 
-    @RequestMapping("getRecordByBankOrderNo")
+    @RequestMapping("trade/getRecordByBankOrderNo")
     RpTradePaymentRecord getRecordByBankOrderNo(String bankOrderNo);
 }
