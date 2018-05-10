@@ -34,7 +34,7 @@ public class BankMessageListener{
 //	private RpTransactionMessageService rpTransactionMessageService;
 
 	@JmsListener(destination = "BANK_NOTIFY")
-	public synchronized void onMessage(Message message) {
+	public void onMessage(Message message) {
 
 		Map<String,String> param = null;
 		String strMessage = null;

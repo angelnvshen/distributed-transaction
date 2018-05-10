@@ -86,7 +86,7 @@ public class MainTest {
 			
 			//模拟构建银行扣款成功结果通知
 			Map<String , Object> notifyMap = getNotifyRequestMap(merchantOrderNo);
-			String notifyResultStr = SimpleHttpUtils.httpGet("http://192.168.1.162:8082/roncoo-pay-web-gateway/scanPayNotify/notify/TEST_PAY_HTTP_CLIENT", notifyMap);
+			String notifyResultStr = SimpleHttpUtils.httpGet("http://127.0.0.1:8082/pay-web-gateway/scanPayNotify/notify/TEST_PAY_HTTP_CLIENT", notifyMap);
 			System.out.println(notifyResultStr);
 		}
 	}

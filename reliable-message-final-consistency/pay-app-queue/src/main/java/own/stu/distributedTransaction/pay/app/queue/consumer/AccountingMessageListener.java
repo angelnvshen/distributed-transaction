@@ -9,9 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Service;
 import own.stu.distributedTransaction.common.core.exception.BizException;
+import own.stu.distributedTransaction.pay.service.api.account.RpAccountingVoucherServiceApi;
+import own.stu.distributedTransaction.pay.service.api.entity.RpAccountingVoucher;
 import own.stu.distributedTransaction.pay.service.api.message.RpTransactionMessageServiceApi;
-import own.stu.distributedTransaction.pay.service.user.api.RpAccountingVoucherService;
-import own.stu.distributedTransaction.pay.service.user.entity.RpAccountingVoucher;
 
 import javax.jms.Message;
 
@@ -21,7 +21,7 @@ public class AccountingMessageListener {
     private static final Log LOG = LogFactory.getLog(AccountingMessageListener.class);
 
     @Autowired
-    private RpAccountingVoucherService rpAccountingVoucherService;
+    private RpAccountingVoucherServiceApi rpAccountingVoucherService;
     @Autowired
     private RpTransactionMessageServiceApi rpTransactionMessageService;
 

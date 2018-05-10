@@ -109,7 +109,7 @@ public class RpTradePaymentManagerServiceImpl implements RpTradePaymentManagerSe
         paramMap.put("merchantNo", merchantNo);
         paramMap.put("merchantOrderNo", merchantOrderNo);
         List<RpTradePaymentOrder> list = rpTradePaymentOrderDao.listPage(paramMap);
-        return list.get(0);
+        return list.size() == 0 ? null : list.get(0);
     }
 
     /**

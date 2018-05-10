@@ -1,4 +1,4 @@
-package own.stu.distributedTransaction.pay.web.shop;
+package own.stu.distributedTransaction.pay;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -8,16 +8,17 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import tk.mybatis.spring.annotation.MapperScan;
 
 @Controller
 @SpringBootApplication
 @ServletComponentScan
-@ComponentScan(basePackages = "own.stu.distributedTransaction")
-@PropertySource("classpath:pay_config.properties") //添加其他的 .properties 文件
-public class PayWebShopApplication extends WebMvcConfigurerAdapter {
+@ComponentScan(basePackages = {"own.stu.distributedTransaction.pay", "own.stu.distributedTransaction.common.core.config"})
+@MapperScan(basePackages = "own.stu.distributedTransaction.pay.service.*.dao")
+public class PayWebGatewayApplication extends WebMvcConfigurerAdapter {
 
     public static void main(String[] args) {
-        SpringApplication.run(PayWebShopApplication.class, args);
+        SpringApplication.run(PayWebGatewayApplication.class, args);
     }
 
     @RequestMapping("/")

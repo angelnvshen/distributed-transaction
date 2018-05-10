@@ -21,24 +21,6 @@
 
         <dependency>
             <groupId>own.stu.distributed-transaction</groupId>
-            <artifactId>pay-service-message</artifactId>
-            <version>${project.parent.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>own.stu.distributed-transaction</groupId>
-            <artifactId>pay-service-trade</artifactId>
-            <version>${project.parent.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>own.stu.distributed-transaction</groupId>
-            <artifactId>pay-service-user</artifactId>
-            <version>${project.parent.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>own.stu.distributed-transaction</groupId>
             <artifactId>pay-service-api</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
