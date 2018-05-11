@@ -10,9 +10,10 @@ import java.util.Map;
 
 //@FeignClient(name = "${pay.web.trade.service.name}")
 @FeignClient(name = "pay-web-trade-api")
+@RequestMapping("trade")
 public interface RpTradePaymentServiceApi {
 
-    @RequestMapping("trade/getRecordByBankOrderNo")
+    @RequestMapping("getRecordByBankOrderNo")
     RpTradePaymentRecord getRecordByBankOrderNo(String bankOrderNo);
 
     @RequestMapping("completeScanPay")
