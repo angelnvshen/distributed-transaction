@@ -4,8 +4,8 @@ import own.stu.distributedTransaction.common.core.utils.StringUtil;
 import own.stu.distributedTransaction.pay.service.user.enums.NotifyStatusEnum;
 import own.stu.distributedTransaction.pay.service.user.enums.NotifyTypeEnum;
 
-import java.util.Date;
 import javax.persistence.*;
+import java.util.Date;
 
 @Table(name = "rp_notify_record")
 public class RpNotifyRecord {
@@ -16,7 +16,7 @@ public class RpNotifyRecord {
     private Integer version;
 
     @Column(name = "create_time")
-    private Date createTime;
+    private Date createTime = new Date();// 创建时间.;
 
     /**
      * 修改者
@@ -34,7 +34,9 @@ public class RpNotifyRecord {
     @Column(name = "edit_time")
     private Date editTime;
 
-    /** 最后一次通知时间 **/
+    /**
+     * 最后一次通知时间
+     **/
     private Date lastNotifyTime;
 
     @Column(name = "notify_times")
@@ -277,7 +279,7 @@ public class RpNotifyRecord {
     }
 
     public RpNotifyRecord(Date createTime, Date lastNotifyTime, Integer notifyTimes, Integer limitNotifyTimes, String url,
-                          String  merchantNo, String merchantOrderNo, NotifyStatusEnum status, NotifyTypeEnum type) {
+                          String merchantNo, String merchantOrderNo, NotifyStatusEnum status, NotifyTypeEnum type) {
         this.createTime = createTime;
         this.lastNotifyTime = lastNotifyTime;
         this.notifyTimes = notifyTimes;

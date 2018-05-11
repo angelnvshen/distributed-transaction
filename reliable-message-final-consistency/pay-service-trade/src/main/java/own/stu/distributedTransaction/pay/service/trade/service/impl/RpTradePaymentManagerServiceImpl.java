@@ -62,6 +62,7 @@ import java.util.Map;
  */
 @Primary
 @Service
+@Transactional
 public class RpTradePaymentManagerServiceImpl implements RpTradePaymentManagerService {
 
     private static final Logger LOG = LoggerFactory.getLogger(RpTradePaymentManagerServiceImpl.class);

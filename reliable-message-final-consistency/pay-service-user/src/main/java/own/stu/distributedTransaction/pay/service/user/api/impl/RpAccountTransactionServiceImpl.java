@@ -34,6 +34,7 @@ import java.util.Map;
  * @创建时间：2019-5-18 上午11:14:10
  */
 @Service
+@Transactional
 public class RpAccountTransactionServiceImpl implements RpAccountTransactionService {
 
     private static final Logger LOG = LoggerFactory.getLogger(RpAccountTransactionServiceImpl.class);

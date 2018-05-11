@@ -17,7 +17,7 @@ public class RpAccountingVoucher {
      * 创建时间
      */
     @Column(name = "create_time")
-    private Date createTime;
+   private Date createTime= new Date();// 创建时间.;
 
     /**
      * 最后修改时间

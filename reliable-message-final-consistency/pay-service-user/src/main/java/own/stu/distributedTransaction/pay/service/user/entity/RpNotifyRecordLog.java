@@ -11,7 +11,7 @@ public class RpNotifyRecordLog {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id = StringUtil.get32UUID();// 主键ID.
 
-    private Integer version;
+    private Integer version = 0;
 
     /**
      * 修改者
@@ -30,7 +30,7 @@ public class RpNotifyRecordLog {
     private Date editTime;
 
     @Column(name = "create_time")
-    private Date createTime;
+   private Date createTime= new Date();// 创建时间.;
 
     @Column(name = "notify_id")
     private String notifyId;

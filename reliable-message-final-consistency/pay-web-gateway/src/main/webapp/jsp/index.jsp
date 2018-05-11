@@ -1,5 +1,12 @@
-<html>
-<body>
-<h2>Hello World!</h2>
+<!DOCTYPE html>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<head>
+    <meta charset="utf-8"/>
+    <title></title>
+
+</head><body>
+hello,world 中文是否乱码
 </body>
 </html>

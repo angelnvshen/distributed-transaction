@@ -10,12 +10,12 @@ public class RpUserPayInfo {
     private String id;
 
     @Column(name = "create_time")
-    private Date createTime;
+   private Date createTime= new Date();// 创建时间.;
 
     @Column(name = "edit_time")
     private Date editTime;
 
-    private Long version;
+    private Long version = 0l;// 版本号默认为0
 
     private String remark;
 

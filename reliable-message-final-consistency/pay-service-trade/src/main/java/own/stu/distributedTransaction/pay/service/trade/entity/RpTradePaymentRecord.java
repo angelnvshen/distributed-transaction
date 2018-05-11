@@ -1,5 +1,6 @@
 package own.stu.distributedTransaction.pay.service.trade.entity;
 
+import own.stu.distributedTransaction.common.core.entity.BaseEntity;
 import own.stu.distributedTransaction.common.core.utils.StringUtil;
 
 import java.math.BigDecimal;
@@ -7,46 +8,7 @@ import java.util.Date;
 import javax.persistence.*;
 
 @Table(name = "rp_trade_payment_record")
-public class RpTradePaymentRecord {
-    /**
-     * ID
-     */
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id = StringUtil.get32UUID();// 主键ID.
-
-    /**
-     * 版本号
-     */
-    private Integer version;
-
-    /**
-     * 创建时间
-     */
-    @Column(name = "create_time")
-    private Date createTime;
-
-    /**
-     * 状态(参考枚举:PaymentRecordStatusEnum)
-     */
-    private String status;
-
-    /**
-     * 修改者
-     */
-    private String editor;
-
-    /**
-     * 创建者
-     */
-    private String creater;
-
-    /**
-     * 最后修改时间
-     */
-    @Column(name = "edit_time")
-    private Date editTime;
-
+public class RpTradePaymentRecord extends BaseEntity {
     /**
      * 商品名称
      */
@@ -275,11 +237,6 @@ public class RpTradePaymentRecord {
     @Column(name = "fund_into_type")
     private String fundIntoType;
 
-    /**
-     * 备注
-     */
-    private String remark;
-
     private String field1;
 
     private String field2;
@@ -293,131 +250,6 @@ public class RpTradePaymentRecord {
     @Column(name = "bank_return_msg")
     private String bankReturnMsg;
 
-    /**
-     * 获取ID
-     *
-     * @return id - ID
-     */
-    public String getId() {
-        return id;
-    }
-
-    /**
-     * 设置ID
-     *
-     * @param id ID
-     */
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    /**
-     * 获取版本号
-     *
-     * @return version - 版本号
-     */
-    public Integer getVersion() {
-        return version;
-    }
-
-    /**
-     * 设置版本号
-     *
-     * @param version 版本号
-     */
-    public void setVersion(Integer version) {
-        this.version = version;
-    }
-
-    /**
-     * 获取创建时间
-     *
-     * @return create_time - 创建时间
-     */
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    /**
-     * 设置创建时间
-     *
-     * @param createTime 创建时间
-     */
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    /**
-     * 获取状态(参考枚举:PaymentRecordStatusEnum)
-     *
-     * @return status - 状态(参考枚举:PaymentRecordStatusEnum)
-     */
-    public String getStatus() {
-        return status;
-    }
-
-    /**
-     * 设置状态(参考枚举:PaymentRecordStatusEnum)
-     *
-     * @param status 状态(参考枚举:PaymentRecordStatusEnum)
-     */
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    /**
-     * 获取修改者
-     *
-     * @return editor - 修改者
-     */
-    public String getEditor() {
-        return editor;
-    }
-
-    /**
-     * 设置修改者
-     *
-     * @param editor 修改者
-     */
-    public void setEditor(String editor) {
-        this.editor = editor;
-    }
-
-    /**
-     * 获取创建者
-     *
-     * @return creater - 创建者
-     */
-    public String getCreater() {
-        return creater;
-    }
-
-    /**
-     * 设置创建者
-     *
-     * @param creater 创建者
-     */
-    public void setCreater(String creater) {
-        this.creater = creater;
-    }
-
-    /**
-     * 获取最后修改时间
-     *
-     * @return edit_time - 最后修改时间
-     */
-    public Date getEditTime() {
-        return editTime;
-    }
-
-    /**
-     * 设置最后修改时间
-     *
-     * @param editTime 最后修改时间
-     */
-    public void setEditTime(Date editTime) {
-        this.editTime = editTime;
-    }
 
     /**
      * 获取商品名称
@@ -1101,24 +933,6 @@ public class RpTradePaymentRecord {
      */
     public void setFundIntoType(String fundIntoType) {
         this.fundIntoType = fundIntoType;
-    }
-
-    /**
-     * 获取备注
-     *
-     * @return remark - 备注
-     */
-    public String getRemark() {
-        return remark;
-    }
-
-    /**
-     * 设置备注
-     *
-     * @param remark 备注
-     */
-    public void setRemark(String remark) {
-        this.remark = remark;
     }
 
     /**

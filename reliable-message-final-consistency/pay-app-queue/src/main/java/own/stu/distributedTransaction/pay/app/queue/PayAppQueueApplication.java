@@ -8,13 +8,13 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import own.stu.distributedTransaction.pay.service.api.account.RpAccountingVoucherServiceApi;
 import own.stu.distributedTransaction.pay.service.api.message.RpTransactionMessageServiceApi;
-import own.stu.distributedTransaction.pay.service.api.trade.RpTradePaymentQueryServiceApi;
+import own.stu.distributedTransaction.pay.service.api.trade.RpTradePaymentServiceApi;
 
 @SpringBootApplication
 @EnableDiscoveryClient
 @EnableFeignClients(
         clients = {RpTransactionMessageServiceApi.class,
-        RpTradePaymentQueryServiceApi.class,
+                RpTradePaymentServiceApi.class,
                 RpAccountingVoucherServiceApi.class})
 @ComponentScan(basePackages = "own.stu.distributedTransaction.pay")
 @EnableScheduling

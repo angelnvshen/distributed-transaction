@@ -6,7 +6,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import own.stu.distributedTransaction.pay.service.api.message.RpTransactionMessageServiceApi;
-import own.stu.distributedTransaction.pay.service.api.trade.RpTradePaymentQueryServiceApi;
+import own.stu.distributedTransaction.pay.service.api.trade.RpTradePaymentServiceApi;
 
 import java.util.Map;
 
@@ -19,7 +19,7 @@ public class BankMessageBiz {
     private static final Log LOG = LogFactory.getLog(BankMessageBiz.class);
 
     @Autowired
-    private RpTradePaymentQueryServiceApi rpTradePaymentManagerService;
+    private RpTradePaymentServiceApi rpTradePaymentManagerService;
 
     @Autowired
     private RpTransactionMessageServiceApi rpTransactionMessageService;

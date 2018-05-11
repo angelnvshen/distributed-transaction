@@ -29,7 +29,7 @@ public class PayTradeAPIController {
     @RequestMapping("completeScanPay")
     public String completeScanPay(@RequestBody Map<String, String> resultMap){
         String payWayCode = resultMap.get("payWayCode");
-        rpTradePaymentManagerService.completeScanPayByResult(payWayCode, resultMap);
+        rpTradePaymentManagerService.completeScanPay(payWayCode, resultMap);
         return "success";
     }
 }

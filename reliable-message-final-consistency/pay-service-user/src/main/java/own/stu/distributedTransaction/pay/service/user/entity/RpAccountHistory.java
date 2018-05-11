@@ -11,15 +11,15 @@ import own.stu.distributedTransaction.common.core.utils.StringUtil;
 public class RpAccountHistory implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id = StringUtil.get32UUID();;
+    private String id = StringUtil.get32UUID();
 
     @Column(name = "create_time")
-    private Date createTime;
+    private Date createTime= new Date();// 创建时间.
 
     @Column(name = "edit_time")
     private Date editTime;
 
-    private Long version;
+    private Long version = 0l;// 版本号默认为0
 
     private String remark;
 
@@ -57,6 +57,7 @@ public class RpAccountHistory implements Serializable {
     private String status;
 
     /** 用户名 **/
+    @Transient
     private String userName;
 
     public String getUserName() {

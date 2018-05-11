@@ -18,13 +18,13 @@ public class RpPayWay {
     /**
      * version
      */
-    private Long version;
+    private Long version = 0l;// 版本号默认为0
 
     /**
      * 创建时间
      */
     @Column(name = "create_time")
-    private Date createTime;
+   private Date createTime= new Date();// 创建时间.;
 
     /**
      * 修改时间

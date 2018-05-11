@@ -26,8 +26,8 @@ public class BaseEntity implements Serializable {
 	private String creater;// 创建人.
 	@Column(name = "create_time")
 	private Date createTime = new Date();// 创建时间.
-	@Column(name = "edit_time")
 	private String editor;// 修改人.
+	@Column(name = "edit_time")
 	private Date editTime;// 修改时间.
 	private String remark;// 描述
 

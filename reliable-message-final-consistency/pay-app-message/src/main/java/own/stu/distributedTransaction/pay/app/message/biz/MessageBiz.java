@@ -10,7 +10,7 @@ import own.stu.distributedTransaction.pay.service.api.entity.RpTradePaymentRecor
 import own.stu.distributedTransaction.pay.service.api.entity.RpTransactionMessage;
 import own.stu.distributedTransaction.pay.service.api.enums.TradeStatusEnum;
 import own.stu.distributedTransaction.pay.service.api.message.RpTransactionMessageServiceApi;
-import own.stu.distributedTransaction.pay.service.api.trade.RpTradePaymentQueryServiceApi;
+import own.stu.distributedTransaction.pay.service.api.trade.RpTradePaymentServiceApi;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -26,7 +26,7 @@ public class MessageBiz {
     private static final Log log = LogFactory.getLog(MessageBiz.class);
 
     @Autowired
-    private RpTradePaymentQueryServiceApi rpTradePaymentQueryService;
+    private RpTradePaymentServiceApi rpTradePaymentQueryService;
     @Autowired
     private RpTransactionMessageServiceApi rpTransactionMessageService;
 

@@ -27,6 +27,7 @@ package own.stu.distributedTransaction.usableServer.service;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import own.stu.distributedTransaction.usableServer.mapper.CountryMapper;
 import own.stu.distributedTransaction.usableServer.model.Country;
 import tk.mybatis.mapper.entity.Example;
@@ -40,6 +41,7 @@ import java.util.List;
  * @since 2018-12-19 11:09
  */
 @Service
+@Transactional
 public class CountryService {
 
     @Autowired
@@ -88,6 +90,7 @@ public class CountryService {
             countryMapper.updateByPrimaryKey(country);
         } else {
             countryMapper.insert(country);
+            int x = 100/0;
         }
     }
 }

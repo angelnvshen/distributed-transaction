@@ -13,7 +13,7 @@ public class RpUserInfo {
     private String id = StringUtil.get32UUID();// 主键ID.
 
     @Column(name = "create_time")
-    private Date createTime;
+   private Date createTime= new Date();// 创建时间.;
 
     private String status;
 

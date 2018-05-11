@@ -27,6 +27,7 @@ package own.stu.distributedTransaction.usableServer.service;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import own.stu.distributedTransaction.usableServer.mapper.CityMapper;
 import own.stu.distributedTransaction.usableServer.model.City;
 
@@ -37,6 +38,7 @@ import java.util.List;
  * @since 2018-12-19 11:09
  */
 @Service
+@Transactional
 public class CityService {
 
     @Autowired

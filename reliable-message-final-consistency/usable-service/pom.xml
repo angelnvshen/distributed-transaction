@@ -91,10 +91,10 @@
         </dependency>
 
         <!-- 依赖 Spring Cloud Netflix Eureka -->
-        <dependency>
+       <!-- <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-eureka</artifactId>
-        </dependency>
+        </dependency>-->
 
     </dependencies>
 
