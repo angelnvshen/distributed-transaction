@@ -33,7 +33,7 @@ public class PayWebMessageAPIApplication extends SpringBootServletInitializer {
 
     @RequestMapping("/")
     String home() {
-        return "redirect:message/test";
+        return "redirect:trade/test";
     }
 
 }

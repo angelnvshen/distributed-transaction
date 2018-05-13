@@ -154,8 +154,10 @@ public class RpAccountingVoucher {
     private BigDecimal payerFee;
 
     /** 分录步骤，1：产生交易 2：清算对账 */
+    @Transient
     private Integer step; // 非数据库映射字段，只用于传参
 
+    @Transient
     private String messageId; // 非数据库映射字段，只用于传参
 
     public Integer getStep() {

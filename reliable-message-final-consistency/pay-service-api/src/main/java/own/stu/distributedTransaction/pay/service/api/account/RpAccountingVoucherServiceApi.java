@@ -8,8 +8,8 @@ import own.stu.distributedTransaction.pay.service.api.entity.RpAccountingVoucher
 /**
  * Created by CHANEL on 2018/5/10.
  */
-@FeignClient(name = "pay-web-trade-api")
-@RequestMapping("accounting")
+@FeignClient(name = "${pay.web.trade.api.name}")
+@RequestMapping("${pay.web.trade.api.name}/accounting")
 public interface RpAccountingVoucherServiceApi {
 
     @RequestMapping("createAccountingVoucher")

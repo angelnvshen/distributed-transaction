@@ -3,6 +3,7 @@ package own.stu.distributedTransaction.pay.web.user.api.trade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import own.stu.distributedTransaction.pay.service.trade.service.RpTradePaymentManagerService;
 import own.stu.distributedTransaction.pay.service.trade.service.RpTradePaymentQueryService;
@@ -31,5 +32,10 @@ public class PayTradeAPIController {
         String payWayCode = resultMap.get("payWayCode");
         rpTradePaymentManagerService.completeScanPay(payWayCode, resultMap);
         return "success";
+    }
+
+    @RequestMapping("test")
+    public String test(@RequestParam(value = "message", defaultValue = "success") String message){
+        return message;
     }
 }

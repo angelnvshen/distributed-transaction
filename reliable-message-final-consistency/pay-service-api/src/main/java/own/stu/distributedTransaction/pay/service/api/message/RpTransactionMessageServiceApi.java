@@ -8,9 +8,8 @@ import own.stu.distributedTransaction.pay.service.api.entity.RpTransactionMessag
 
 import java.util.Map;
 
-//@FeignClient(name = "${pay.web.message.service.name}")
-@FeignClient(name = "pay-web-message-api")
-@RequestMapping("message")
+@FeignClient(name = "${pay.web.message.api.name}")
+@RequestMapping("${pay.web.message.api.name}/message")
 public interface RpTransactionMessageServiceApi {
 
     @RequestMapping("saveMessageWaitingConfirm")
