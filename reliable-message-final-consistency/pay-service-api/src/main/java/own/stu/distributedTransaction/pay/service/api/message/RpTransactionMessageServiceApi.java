@@ -8,37 +8,37 @@ import own.stu.distributedTransaction.pay.service.api.entity.RpTransactionMessag
 
 import java.util.Map;
 
-//@FeignClient(name = "${pay.web.message.service.name}")
-@FeignClient(name = "pay-web-message-api")
+@FeignClient(name = "${pay.web.message.api.name}")
+@RequestMapping("${pay.web.message.api.name}/message")
 public interface RpTransactionMessageServiceApi {
 
-    @RequestMapping("message/saveMessageWaitingConfirm")
+    @RequestMapping("saveMessageWaitingConfirm")
     String saveMessageWaitingConfirm(@RequestBody RpTransactionMessage rpTransactionMessage);
 
-    @RequestMapping("message/confirmAndSendMessage")
+    @RequestMapping("confirmAndSendMessage")
     String confirmAndSendMessage(String messageId);
 
-    @RequestMapping("message/saveAndSendMessage")
+    @RequestMapping("saveAndSendMessage")
     String saveAndSendMessage(@RequestBody RpTransactionMessage rpTransactionMessage);
 
-    @RequestMapping("message/directSendMessage")
+    @RequestMapping("directSendMessage")
     String directSendMessage(@RequestBody RpTransactionMessage rpTransactionMessage);
 
-    @RequestMapping("message/reSendMessage")
+    @RequestMapping("reSendMessage")
     String reSendMessage(@RequestBody RpTransactionMessage rpTransactionMessage);
 
-    @RequestMapping("message/reSendMessageByMessageId")
+    @RequestMapping("reSendMessageByMessageId")
     String reSendMessageByMessageId(String messageId);
 
-    @RequestMapping("message/setMessageToAreadlyDead")
+    @RequestMapping("setMessageToAreadlyDead")
     String setMessageToAreadlyDead(String messageId);
 
-    @RequestMapping("message/getMessageByMessageId")
+    @RequestMapping("getMessageByMessageId")
     RpTransactionMessage getMessageByMessageId(String messageId);
 
-    @RequestMapping("message/deleteMessageByMessageId")
+    @RequestMapping("deleteMessageByMessageId")
     String deleteMessageByMessageId(String messageId);
 
-    @RequestMapping("message/listPage")
+    @RequestMapping("listPage")
     PageBean listPage(@RequestBody Map<String, Object> paramMap);
 }

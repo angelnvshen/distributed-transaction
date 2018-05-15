@@ -8,11 +8,11 @@ import own.stu.distributedTransaction.pay.service.api.entity.RpTradePaymentRecor
 
 import java.util.Map;
 
-//@FeignClient(name = "${pay.web.trade.service.name}")
-@FeignClient(name = "pay-web-trade-api")
+@FeignClient(name = "${pay.web.trade.api.name}")
+@RequestMapping("${pay.web.trade.api.name}/trade")
 public interface RpTradePaymentServiceApi {
 
-    @RequestMapping("trade/getRecordByBankOrderNo")
+    @RequestMapping("getRecordByBankOrderNo")
     RpTradePaymentRecord getRecordByBankOrderNo(String bankOrderNo);
 
     @RequestMapping("completeScanPay")

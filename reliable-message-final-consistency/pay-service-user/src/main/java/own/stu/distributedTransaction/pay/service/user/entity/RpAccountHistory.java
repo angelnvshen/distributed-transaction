@@ -5,7 +5,9 @@ import java.math.BigDecimal;
 import java.util.Date;
 import javax.persistence.*;
 import own.stu.distributedTransaction.common.core.entity.BaseEntity;
+import own.stu.distributedTransaction.common.core.enums.TrxTypeEnum;
 import own.stu.distributedTransaction.common.core.utils.StringUtil;
+import own.stu.distributedTransaction.pay.service.user.enums.AccountFundDirectionEnum;
 
 @Table(name = "rp_account_history")
 public class RpAccountHistory implements Serializable {
@@ -305,4 +307,13 @@ public class RpAccountHistory implements Serializable {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    public String getFundDirectionDesc() {
+        return AccountFundDirectionEnum.getEnum(this.getFundDirection()).getLabel();
+    }
+
+    public String getTrxTypeDesc() {
+        return TrxTypeEnum.getEnum(this.getTrxType()).getDesc();
+    }
+
 }

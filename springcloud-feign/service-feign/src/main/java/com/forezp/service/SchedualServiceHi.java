@@ -8,8 +8,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 /**
  * Created by fangzhipeng on 2017/4/6.
  */
-@FeignClient(value = "service-hi")
+@FeignClient(value = "${service.hi}")
+@RequestMapping("${service.hi}")
 public interface SchedualServiceHi {
-    @RequestMapping(value = "/hi",method = RequestMethod.GET)
+    @RequestMapping(value = "hi",method = RequestMethod.GET)
     String sayHiFromClientOne(@RequestParam(value = "name") String name);
 }
