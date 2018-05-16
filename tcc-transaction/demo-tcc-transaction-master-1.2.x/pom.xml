@@ -336,7 +336,7 @@
             </snapshots>
         </repository>
     </repositories>
-    <pluginRepositories>
+    <!--<pluginRepositories>
         <pluginRepository>
             <id>tcc-transaction-internal-snapshots</id>
             <name>internal repository for snapshots artifacts</name>
@@ -359,7 +359,7 @@
                 <enabled>true</enabled>
             </releases>
         </pluginRepository>
-        <!-- no snapshot allowed for external repositories -->
+        &lt;!&ndash; no snapshot allowed for external repositories &ndash;&gt;
         <pluginRepository>
             <id>tcc-transaction-central-cache</id>
             <name>cache to external repositories</name>
@@ -376,7 +376,7 @@
                 <enabled>false</enabled>
             </snapshots>
         </pluginRepository>
-    </pluginRepositories>
+    </pluginRepositories>-->
 
     <build>
         <resources>
@@ -448,7 +448,7 @@
 
     </build>
 
-    <distributionManagement>
+    <!--<distributionManagement>
         <repository>
             <id>repo.releases</id>
             <name>internal corporate repository</name>
@@ -459,6 +459,6 @@
             <name>internal corporate snapshots repository</name>
             <url>${repo.internal.snapshots.url}</url>
         </snapshotRepository>
-    </distributionManagement>
+    </distributionManagement>-->
 
 </project>
