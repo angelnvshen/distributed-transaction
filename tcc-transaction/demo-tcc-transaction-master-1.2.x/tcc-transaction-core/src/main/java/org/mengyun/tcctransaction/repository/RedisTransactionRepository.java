@@ -58,7 +58,7 @@ public class RedisTransactionRepository extends CachableTransactionRepository {
                 @Override
                 public Long doInJedis(Jedis jedis) {
 
-
+                    System.out.println("Redis - doCreate");
                     List<byte[]> params = new ArrayList<byte[]>();
 
                     for (Map.Entry<byte[], byte[]> entry : ExpandTransactionSerializer.serialize(serializer, transaction).entrySet()) {
@@ -82,7 +82,7 @@ public class RedisTransactionRepository extends CachableTransactionRepository {
     protected int doUpdate(final Transaction transaction) {
 
         try {
-
+            System.out.println("Redis - doUpdate");
             Long statusCode = RedisHelper.execute(jedisPool, new JedisCallback<Long>() {
                 @Override
                 public Long doInJedis(Jedis jedis) {
@@ -114,7 +114,7 @@ public class RedisTransactionRepository extends CachableTransactionRepository {
     @Override
     protected int doDelete(final Transaction transaction) {
         try {
-
+            System.out.println("Redis - doDelete");
             Long result = RedisHelper.execute(jedisPool, new JedisCallback<Long>() {
                 @Override
                 public Long doInJedis(Jedis jedis) {
@@ -133,6 +133,7 @@ public class RedisTransactionRepository extends CachableTransactionRepository {
     protected Transaction doFindOne(final Xid xid) {
 
         try {
+            System.out.println("Redis - doFindOne");
             Long startTime = System.currentTimeMillis();
             Map<byte[], byte[]> content = RedisHelper.execute(jedisPool, new JedisCallback<Map<byte[], byte[]>>() {
                 @Override
@@ -171,6 +172,7 @@ public class RedisTransactionRepository extends CachableTransactionRepository {
     protected List<Transaction> doFindAll() {
 
         try {
+            System.out.println("Redis - doFindAll");
 
             final Set<byte[]> keys = RedisHelper.execute(jedisPool, new JedisCallback<Set<byte[]>>() {
                 @Override
