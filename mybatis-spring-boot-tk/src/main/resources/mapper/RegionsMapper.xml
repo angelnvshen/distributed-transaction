@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="tk.mybatis.springboot.mapper.RegionsMapper" >
+  <resultMap id="BaseResultMap" type="tk.mybatis.springboot.model.Regions" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="region_id" property="regionId" jdbcType="INTEGER" />
+    <result column="p_region_id" property="pRegionId" jdbcType="INTEGER" />
+    <result column="region_path" property="regionPath" jdbcType="VARCHAR" />
+    <result column="region_grade" property="regionGrade" jdbcType="INTEGER" />
+    <result column="local_name" property="localName" jdbcType="VARCHAR" />
+    <result column="zipcode" property="zipcode" jdbcType="VARCHAR" />
+    <result column="cod" property="cod" jdbcType="VARCHAR" />
+  </resultMap>
+
+
+    <resultMap id="moreResultMap" type="tk.mybatis.springboot.model.RegionsMore" extends="BaseResultMap">
+        <result property="nLevel" column="nLevel" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!-- 根据id获取子级列表 -->
+  <select id="listChildrenById" parameterType="int" resultType="tk.mybatis.springboot.model.Regions" >
+    select c.region_id as regionId,
+           c.local_name as localName,
+           c.region_grade as regionGrade,
+           c.p_region_id as pRegionId,
+           count(s.region_id) as childnum,
+           c.zipcode as zipcode,
+           c.cod as cod
+    from es_regions c
+    left join
+    es_regions s
+    on s.p_region_id = c.region_id
+    where
+    1=1
+    and c.p_region_id=#{regionsId}
+    group by c.region_id,c.local_name,c.region_grade,c.p_region_id,c.zipcode,c.cod order by c.region_id
+  </select>
+
+    <!--获取所有的区域信息-->
+    <select id="getListOrderByNLevel" resultMap="moreResultMap" >
+        SELECT B.nLevel, A.*
+        FROM es_regions A,tmpLst_regions B
+        WHERE A.region_id=B.ID
+        ORDER BY B.sCort
+    </select>
+</mapper>
