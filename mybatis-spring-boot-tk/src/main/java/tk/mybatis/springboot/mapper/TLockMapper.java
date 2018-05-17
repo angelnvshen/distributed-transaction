@@ -6,4 +6,5 @@ import tk.mybatis.springboot.util.MyMapper;
 public interface TLockMapper extends MyMapper<TLock> {
 
     TLock selectForUpdateByKey(int key);
+    int updateBy(TLock lock);
 }

@@ -24,19 +24,23 @@ public class OwnTest {
     @Test
     public void testMultiSelectForUpdate() throws InterruptedException {
 
-        Semaphore semaphore = new Semaphore(100);
+        int threadNum = 100;
+//        Semaphore semaphore = new Semaphore(100);
+//        CountDownLatch latch = new CountDownLatch(threadNum);
         ExecutorService service = Executors.newCachedThreadPool();
-        for(int i =0;i<100;i++)
+        for(int i =0;i<threadNum;i++)
             service.submit(()->{
-                try {
+                /*try {
                     semaphore.acquire();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
-                }
+                }*/
+//                latch.countDown();
                 sendMeg();
             });
-        TimeUnit.SECONDS.sleep(10);
-        semaphore.release(100);
+        TimeUnit.HOURS.sleep(1);
+//        semaphore.release(100);
+//        latch.await();
     }
 
     private void sendMeg(){

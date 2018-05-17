@@ -20,7 +20,9 @@ public class LockController {
     @ResponseBody
     public String selectForUpdate(int id, @RequestParam(name = "value", defaultValue = "10",
             required = false)Integer value){
-        lockService._selectForUpdate(id, value);
-        return "success";
+        if(!"0".equals(lockService._updateByVersion(id, value))){
+            return "success";
+        }
+        return "fail";
     }
 }
