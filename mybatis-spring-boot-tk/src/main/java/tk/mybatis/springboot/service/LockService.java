@@ -33,7 +33,9 @@ public class LockService {
 
             int now_value = Integer.valueOf(lock.getValue()) + inc_value;
             lock.setValue(now_value + "");
-            return lockMapper.updateBy(lock);
+            int nums = lockMapper.updateBy(lock);
+            System.out.println("nums" + nums);
+            return nums;
         }
         return 0;
     }
