@@ -44,7 +44,8 @@ public class OwnTest {
     }
 
     private void sendMeg(){
-        String url = "http://localhost:9090/selectForUpdate?id=1";
+//        String url = "http://localhost:9090/selectForUpdate?id=1";
+        String url = "http://localhost:9090/exchangeAmount";
         RestTemplate restTemplate = new RestTemplate();
         String response = restTemplate.postForObject(url, null, String.class);
         System.out.println(response);

@@ -25,6 +25,31 @@ public class LockService {
     @Autowired
     private TLockHistoryMapper lockHistoryMapper;
 
+    public int exchangeAmount(int key, int inc_value, int to_id){
+        TLock _from = lockMapper.selectByPrimaryKey(key);
+        if(_from != null){
+
+            //
+            saveHistory(_from);
+
+            int now_value = Integer.valueOf(_from.getValue()) - inc_value;
+            _from.setValue(now_value + "");
+            int nums = lockMapper.updateBy(_from);
+
+            TLock _to = lockMapper.selectByPrimaryKey(to_id);
+            if(_to == null)
+                throw new RuntimeException("收款用户不存在");
+
+            saveHistory(_to);
+            _to.setValue((Integer.valueOf(_to.getValue()) + inc_value) + "");
+            int _to_nums = lockMapper.updateBy(_to);
+            if(_to_nums == 0)
+                throw new RuntimeException("支付失败，收款方未收到款项");
+            return nums;
+        }
+        return 0;
+    }
+
     public int _updateByVersion(int key, int inc_value){
         TLock lock = lockMapper.selectByPrimaryKey(key);
         if(lock != null){

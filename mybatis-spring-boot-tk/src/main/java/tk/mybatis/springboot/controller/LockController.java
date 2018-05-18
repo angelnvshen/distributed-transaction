@@ -25,4 +25,23 @@ public class LockController {
         }
         return "fail";
     }
+
+    /**
+     * 交易
+     * @param from_id 支付账号
+     * @param value 支付金额
+     * @param to_id 收款账号
+     * @return
+     */
+    @RequestMapping("exchangeAmount")
+    @ResponseBody
+    public String exchangeAmount(@RequestParam(name = "from_id", defaultValue = "1", required = false)Integer from_id,
+                                 @RequestParam(name = "value", defaultValue = "10", required = false)Integer value,
+                                 @RequestParam(name = "to_id", defaultValue = "2", required = false)Integer to_id
+    ){
+        if(0 != lockService.exchangeAmount(from_id, value, to_id)){
+            return "success";
+        }
+        return "fail";
+    }
 }
