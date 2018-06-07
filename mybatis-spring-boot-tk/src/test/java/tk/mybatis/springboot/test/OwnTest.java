@@ -50,4 +50,17 @@ public class OwnTest {
         String response = restTemplate.postForObject(url, null, String.class);
         System.out.println(response);
     }
+
+    @Test
+    public void testFuture() throws ExecutionException, InterruptedException {
+        FutureTask<String> task = new FutureTask<>(() -> {
+            TimeUnit.SECONDS.sleep(3);
+            return "XXXXX";
+        });
+
+        ExecutorService service = Executors.newCachedThreadPool();
+        service.submit(task);
+        System.out.println("--------");
+        System.out.println(task.get());
+    }
 }

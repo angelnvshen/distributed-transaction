@@ -14,5 +14,5 @@ public class PropagationService {
     @Autowired
     private TLockHistoryMapper historyMapper;
 
-    public String test
+    public String test;
 }
