@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: with-rabbit-mq
+  http:
+    encoding:
+      charset: UTF-8
+      force: true
+      enabled: true
+  rabbitmq:
+    addresses: amqp://172.16.2.165:5672
+    username: lsrabbit
+    password: lsrabbit
+    virtual-host: rabbit
+  cloud:
+    stream:
+      bindings:
+        CUSTOMER-NUM-INPUT:
+          group: customer-num-in-shop
+          destination: customer.num
+        CUSTOMER-NUM-OUTPUT:
+          destination: customer.num
+logging:
+  level:
+    own.stu.mq.withrabbitmq: debug
