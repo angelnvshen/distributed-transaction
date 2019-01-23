@@ -1,9 +1,10 @@
-package own.stu.mq.withrabbitmq.simple.hello;
+package own.stu.mq.withrabbitmq.simple.work_queues;
 
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.MessageProperties;
+import own.stu.mq.withrabbitmq.simple.hello.CommonInfo;
 
 public class NewTask {
 

@@ -4,7 +4,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import org.junit.Test;
-import own.stu.mq.withrabbitmq.simple.hello.Worker;
 
 public class ExchangeTest {
 
