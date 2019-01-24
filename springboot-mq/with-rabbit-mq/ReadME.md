@@ -55,3 +55,5 @@ Consumer收到消息时需要显式的向rabbit broker发送basic.ack消息或�
 2. 如果consumer接受了消息, 但在发送ack之前断开连接，rabbitmq会认为这条消息没有被deliver,在consumer在次连接的时候，这条消息会被redeliver。
 3. 如果consumer接受了消息，但是程序中有bug,忘记了ack,rabbitmq不会重复发送消息。
 4. rabbitmq2.0.0和之后的版本支持consumer reject某条（类）消息，可以通过设置requeue参数中的reject为true达到目地，那么rabbitmq将会把消息发送给下一个注册的consumer。
+
+[spring cloud stream rabbitMQ doc ](https://cloud.spring.io/spring-cloud-static/Finchley.SR2/multi/multi_spring-cloud-stream-overview-binders.html)
