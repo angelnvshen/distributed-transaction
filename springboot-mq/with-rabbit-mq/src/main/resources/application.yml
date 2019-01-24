@@ -19,6 +19,9 @@ spring:
           destination: customer.num
         CUSTOMER-NUM-OUTPUT:
           destination: customer.num
+        INPUT:
+          destination: input.customized
+          group: input.customized
 logging:
   level:
     own.stu.mq.withrabbitmq: debug

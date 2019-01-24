@@ -22,7 +22,7 @@ public class Consumer {
     ){
       channel.basicQos(64);
 
-      com.rabbitmq.client.Consumer consumer = new DefaultConsumer(channel){
+      /*com.rabbitmq.client.Consumer consumer = new DefaultConsumer(channel){
         @Override
         public void handleDelivery(String consumerTag, Envelope envelope, BasicProperties properties, byte[] body)
             throws IOException {
@@ -31,7 +31,26 @@ public class Consumer {
         }
       };
 
-      channel.basicConsume(Producer.queue_name, consumer);
+      channel.basicConsume(Producer.queue_name, consumer);*/
+
+      channel.basicConsume(Producer.queue_name, false, "myConsumerTag", new DefaultConsumer(channel){
+        @Override
+        public void handleDelivery(String consumerTag, Envelope envelope, BasicProperties properties, byte[] body)
+            throws IOException {
+
+          System.out.println("consumerTag : " + consumerTag);
+          System.out.println("RoutingKey : " + envelope.getRoutingKey());
+          System.out.println("DeliveryTag : " + envelope.getDeliveryTag());
+          System.out.println("payLoad : " + new String(body));
+          if(envelope.getDeliveryTag() == 6L){
+            System.out.println("reject");
+            channel.basicReject(envelope.getDeliveryTag(), false);
+          }else {
+            System.out.println("akc");
+            channel.basicAck(envelope.getDeliveryTag(), false);
+          }
+        }
+      });
       TimeUnit.SECONDS.sleep(Integer.MAX_VALUE);
     } catch (TimeoutException e) {
       e.printStackTrace();

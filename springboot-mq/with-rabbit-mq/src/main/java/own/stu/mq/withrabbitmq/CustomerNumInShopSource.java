@@ -14,9 +14,14 @@ public interface CustomerNumInShopSource {
   String CUSTOMER_NUM_INPUT = "CUSTOMER-NUM-INPUT";
   String CUSTOMER_NUM_OUTPUT = "CUSTOMER-NUM-OUTPUT";
 
+//  String INPUT_CUSTOMIZED = "input.customized";
+
   @Output(CustomerNumInShopSource.CUSTOMER_NUM_OUTPUT)
   MessageChannel output();
 
   @Input(CustomerNumInShopSource.CUSTOMER_NUM_INPUT)
   SubscribableChannel input();
+
+//  @Input(INPUT_CUSTOMIZED)
+//  SubscribableChannel inputCustomized();
 }
