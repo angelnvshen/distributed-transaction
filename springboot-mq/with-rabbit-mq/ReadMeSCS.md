@@ -1,0 +1,1 @@
+[spring cloud stream partitioned](https://blog.csdn.net/songhaifengshuaige/article/details/79266444)

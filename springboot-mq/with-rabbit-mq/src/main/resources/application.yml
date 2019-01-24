@@ -22,6 +22,9 @@ spring:
         INPUT:
           destination: input.customized
           group: input.customized
+          partitioned: true
+      instanceCount: 2
+      instanceIndex: 0
 logging:
   level:
     own.stu.mq.withrabbitmq: debug
